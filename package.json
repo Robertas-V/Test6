@@ -1,5 +1,5 @@
 {
-  "name": "mean-boilerplate",
+  "name": "Test 6",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,20 +7,20 @@
     "test": "mocha test"
   },
   "dependencies": {
-    "body-parser": "~1.15.0",
-    "cookie-parser": "~1.4.1",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "mongoose": "~4.4.7",
-    "i18next": "1.10.3"
+    "body-parser": "1.15.0",
+    "cookie-parser": "1.4.1",
+    "debug": "2.2.0",
+    "express": "4.13.1",
+    "pug": "2.0.3",
+    "morgan": "1.7.0",
+    "serve-favicon": "2.3.0",
+    "mongoose": "4.4.7",
+    "i18next": "2.0.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "hippie": "^0.4.0",
-    "mocha": "^2.4.5",
-    "supertest": "^1.2.0"
+    "chai": "3.5.0",
+    "hippie": "0.4.0",
+    "mocha": "2.4.5",
+    "supertest": "1.2.0"
   }
 }
