@@ -11,12 +11,8 @@ var routes = require('./routes/index');
 var userAPI = require('./routes/api/0.1/userAPI');
 var fruitAPI = require('./routes/api/0.1/fruitAPI');
 
-console.log("domain");
-
 var dom = domain.create(),
     app = express();
-
-//console.log(dom);
 
 //i18n init
 i18n.init({ lng: 'en-US' }, function(err, t) {
