@@ -38,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+console.info('Environment: ' + app.get('env'));
+
 app.use('/', routes);
 app.use('/api/0.1/user', userAPI);
 app.use('/api/0.1/fruit', fruitAPI);
@@ -49,37 +51,27 @@ app.use(function(error, req, res, next){
         console.info('caught with domain ', error);
         domain.active.emit('error', error);
     }else{
-        //DEFAULT ERROR HANDLERS
-        // catch 404 and forward to error handler
-        app.use(function(req, res, next) {
-            var err = new Error('Not Found');
-            err.status = 404;
-            next(err);
-        });
 
         // development error handler
         // will print stacktrace
-        if (app.get('env') === 'development') {
-          app.use(function(err, req, res, next) {
-            res.status(err.status || 500);
-            res.render('error', {
-                message: err.message,
-                error: err
-            });
-          });
-        }
 
-        // production error handler
-        // no stacktraces leaked to user
         app.use(function(err, req, res, next) {
-            res.status(err.status || 500);
-            res.render('error', {
-                message: err.message,
-                error: {}
-            });
+          res.status(err.status || 500);
+          res.render('error', {
+              message: err.message,
+              error: ( app.get('env') === 'development' ? err : {} )
+          });
         });
     }
 });
 
+//DEFAULT ERROR HANDLER
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    res.render('error', {
+        message: 'Ooops!',
+        error: {status: 'Page not found!' }
+    });
+});
 
 module.exports = app;

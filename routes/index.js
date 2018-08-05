@@ -17,4 +17,18 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/login', function(req, res, next) {
+    var d = domain.create();
+
+    d.on('error', function(error){
+        console.log(error.stacktrace);
+        res.status(500).send({'error': error.message});
+    });
+
+
+    d.run(function(){
+        res.render('login', { title: 'fruit manager | login'});
+    });
+});
+
 module.exports = router;
