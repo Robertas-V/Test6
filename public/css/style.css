@@ -52,7 +52,7 @@ body header{
     text-align: right;
 }
 
-.navbar .container a{
+.navbar .container > a{
     line-height: 75px;
     padding: 0 10px;
     margin: 0;
@@ -70,7 +70,7 @@ body header{
     transition: all .3s ease-in-out;
 }
 
-.navbar .container a.active, .navbar .container a:hover{
+.navbar .container > a.active, .navbar .container > a:hover{
     /*box-shadow: inset 0px -4px 0px #E91E63;*/
     box-shadow: inset 0px -4px 0px  #009688;
 
@@ -85,6 +85,10 @@ body header{
     display: inline-block;
     line-height: 75px;
     margin: 0;
+}
+
+.navbar .container h1 a{
+    float: left;
     font-size: 35px;
     color: #009688;
     font-family: 'Lobster Two', cursive;

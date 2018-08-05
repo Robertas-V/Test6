@@ -47,8 +47,11 @@ app.use('/api/0.1/fruit', fruitAPI);
 // error handlers
 app.use(function(error, req, res, next){
     if(domain.active){
-        console.info('caught with domain ', domain.active);
-        console.info('caught with domain ', error);
+
+        res.render('error', {
+            message: 'domain.active',
+            error: error
+        });
         domain.active.emit('error', error);
     }else{
 
@@ -56,6 +59,7 @@ app.use(function(error, req, res, next){
         // will print stacktrace
 
         app.use(function(err, req, res, next) {
+          console.info('Error handler 3');
           res.status(err.status || 500);
           res.render('error', {
               message: err.message,

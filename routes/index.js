@@ -6,10 +6,10 @@ var express = require('express'),
 router.get('/', function(req, res, next) {
     var d = domain.create();
 
-    d.on('error', function(error){
-        console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
-    });
+    // d.on('error', function(error){
+    //     console.log(error.stacktrace);
+    //     res.status(500).send({'error': error.message});
+    // });
 
 
     d.run(function(){
