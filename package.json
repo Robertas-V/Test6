@@ -7,20 +7,20 @@
     "test": "mocha test"
   },
   "dependencies": {
-    "body-parser": "~1.15.0",
-    "cookie-parser": "~1.4.1",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "mongoose": "~4.4.7",
-    "i18next": "1.10.3"
+    "pug": "2.0.3"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "body-parser": "^1.18.3",
+    "chai": "3.5.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.9",
+    "express": "^4.16.3",
     "hippie": "^0.4.0",
-    "mocha": "^2.4.5",
-    "supertest": "^1.2.0"
+    "i18next": "~1.10.3",
+    "mocha": "2.4.5",
+    "mongoose": "^4.13.14",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.5.0",
+    "supertest": "1.2.0"
   }
 }

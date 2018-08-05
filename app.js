@@ -28,7 +28,7 @@ i18n.registerAppHelper(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -46,6 +46,7 @@ app.use('/api/0.1/fruit', fruitAPI);
 app.use(function(error, req, res, next){
     if(domain.active){
         console.info('caught with domain ', domain.active);
+        console.info('caught with domain ', error);
         domain.active.emit('error', error);
     }else{
         //DEFAULT ERROR HANDLERS

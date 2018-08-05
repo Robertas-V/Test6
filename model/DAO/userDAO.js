@@ -67,6 +67,8 @@ function createUser(user, callbacks){
     });
 }
 
+//createUser( {username: "Robertas", password: "pass"} );
+
 //UPDATE user
 function updateUser(id, user, callbacks){
     return UserModel.findById(id, function (err, u) {

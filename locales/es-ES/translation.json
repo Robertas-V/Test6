@@ -3,8 +3,8 @@
     "name": "fruit manager"
   },
   "creator": {
-    "firstname": "Alejandro",
-    "lastname": "Martin"
+    "firstname": "Robertas",
+    "lastname": "Visniakovas"
   },
   "layout":{
     "navbar":{
@@ -14,7 +14,7 @@
     },
     "footer":{
       "about": "contacto",
-      "text": "<a href=\"http://alex030293.com\">alex030293</a> &copy; 2016"
+      "text": "DroneWorks &copy; 2018"
     }
   },
   "index":{

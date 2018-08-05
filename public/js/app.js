@@ -2,7 +2,7 @@ var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitSe
 .controller('MainController',  ['$scope', '$http', function ($scope, $http) {
     //State vars initialization
     $scope.loading = true;
-    $scope.loggedIn = getCookie('username') != "";
+    $scope.loggedIn = getCookie('username') !== "";
     $scope.fruit={};
     $scope.editing = false;
 
