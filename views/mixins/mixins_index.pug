@@ -9,7 +9,7 @@ mixin navbar(_t, exit)
             h1
                 a(href='/')= _t
                     
-            a(href='' ng-controller="LoginController", ng-click="ShowLogIn(true)") login
+            a(href='' ng-controller="LoginController", ng-hide="loggedIn", ng-click="showLogInForm(true)") login
                         
             a(href='#', ng-show='loggedIn')
                 #add-fruit(ng-click="add_fruit()")
@@ -45,7 +45,7 @@ mixin login_form
     form.login.ng-hide#login(ng-controller="LoginController", ng-show="showLogIn")
         .loginHeader
             span.title= 'Drone Parts'
-            a.closeBtn(href='' ng-click="ShowLogIn(false)") X
+            a.closeBtn(href='' ng-click="showLogInForm(false)") X
         img(src="/android-chrome-96x96.png")
         //- loader
 

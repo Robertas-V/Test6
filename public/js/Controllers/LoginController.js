@@ -1,7 +1,7 @@
 angular.module('FruitApp.LoginController', [])
 .controller('LoginController', ['$scope', 'userFactory', function ($scope, userFactory) {
 
-    $scope.ShowLogIn = function(val){
+    $scope.showLogInForm = function(val){
         console.log('clicked', val);
         $scope.$parent.showLogIn = val;
 
@@ -38,6 +38,7 @@ angular.module('FruitApp.LoginController', [])
                     $this.removeClass('ok loading');
                     working = false;
                     $scope.$parent.loggedIn = true;
+                    $scope.$parent.showLogIn = false;
                     $scope.$apply();
                     //load everything
 
