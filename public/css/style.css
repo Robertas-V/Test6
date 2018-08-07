@@ -41,7 +41,7 @@ body header{
     position: fixed;
     height: 75px;
     width: 100%;
-    z-index: 900000;
+    z-index: 900;
     background: #242424;
 }
 
@@ -513,8 +513,9 @@ tbody tr{
     height: 100vh;
     background: #242424;
     opacity: .70;
-    z-index: 9000;
+    z-index: 1000;
     left:0;
+    top: 0;
 }
 .demo-card-wide.mdl-card {
     position: fixed;
@@ -558,7 +559,7 @@ tbody tr{
 
 .icon {
     color: #fff;
-    font-size: 32px;
+    font-size: 23px;
     display: block;
     line-height: 2;
 }
@@ -574,7 +575,7 @@ tbody tr{
   bottom: 0;
   left: 0;
   background: #242424;
-  width: 75px;
+  width: 45px;
 }
 #menu {
   position: fixed;
@@ -582,7 +583,7 @@ tbody tr{
   top: 0;
   bottom: 0;
   left: 0;
-  margin: auto 21px;
+  margin: auto 10px;
   height: 280px;
   padding: 0;
   text-align: center;
