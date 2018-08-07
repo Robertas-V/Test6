@@ -4,10 +4,12 @@ include mixins/mixins_index
 block content
     section.main
         .clearfix
+        
+            +login_form
 
             .mdl-spinner.mdl-spinner--single-color.mdl-js-spinner.is-active(ng-show='loading')
                 
-            #blur.ng-hide(ng-show="editing && !loading")
+            #blur.ng-hide(ng-show="editing && !loading || showLogIn")
             .demo-card-wide.mdl-card.mdl-shadow--2dp.ng-hide(ng-controller="CardController", ng-show="editing && !loading")
                 .mdl-card__title
                     h2.mdl-card__title-text {{fruit.name || "Insert data"}}

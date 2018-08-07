@@ -13,22 +13,22 @@ router.get('/', function(req, res, next) {
 
 
     d.run(function(){
-        res.render('index', { title: 'fruit manager'});
+        res.render('index', { title: 'Drone Parts'});
     });
 });
 
-router.get('/login', function(req, res, next) {
-    var d = domain.create();
-
-    d.on('error', function(error){
-        console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
-    });
-
-
-    d.run(function(){
-        res.render('login', { title: 'fruit manager | login'});
-    });
-});
+// router.get('/login', function(req, res, next) {
+//     var d = domain.create();
+//
+//     d.on('error', function(error){
+//         console.log(error.stacktrace);
+//         res.status(500).send({'error': error.message});
+//     });
+//
+//
+//     d.run(function(){
+//         res.render('login', { title: 'Drone Parts | login'});
+//     });
+// });
 
 module.exports = router;

@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "fruit manager"
+    "name": "Drone Parts"
   },
   "creator": {
     "firstname": "Robertas",
@@ -8,7 +8,7 @@
   },
   "layout":{
     "navbar":{
-      "title": "fruit manager",
+      "title": "Drone Parts",
       "exit": "exit",
       "add": "add fruit"
     },
@@ -18,7 +18,7 @@
     }
   },
   "index":{
-    "title": "fruit manager",
+    "title": "Drone Parts",
     "login": {
       "title": "Hello!",
       "username": "User",

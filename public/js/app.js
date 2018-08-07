@@ -5,6 +5,7 @@ var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitSe
     $scope.loggedIn = getCookie('username') !== "";
     $scope.fruit={};
     $scope.editing = false;
+    $scope.showLogIn = false;
 
     //Add fruit button handler
     $scope.add_fruit = function(){

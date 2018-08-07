@@ -1,5 +1,16 @@
 angular.module('FruitApp.LoginController', [])
 .controller('LoginController', ['$scope', 'userFactory', function ($scope, userFactory) {
+
+    $scope.ShowLogIn = function(val){
+        console.log('clicked', val);
+        $scope.$parent.showLogIn = val;
+
+        setTimeout(function() {
+            $scope.$apply();
+            //load everything
+        }, 1000);
+    }
+
     //Login form listener
     var working = false;
     $scope.send = function(username, password){
