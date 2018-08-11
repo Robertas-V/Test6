@@ -10,6 +10,7 @@ var express = require('express'),
 var routes = require('./routes/index');
 var userAPI = require('./routes/api/0.1/userAPI');
 var fruitAPI = require('./routes/api/0.1/fruitAPI');
+var dronePartAPI = require('./routes/api/0.1/dronePartAPI');
 
 var dom = domain.create(),
     app = express();
@@ -43,6 +44,7 @@ console.info('Environment: ' + app.get('env'));
 app.use('/', routes);
 app.use('/api/0.1/user', userAPI);
 app.use('/api/0.1/fruit', fruitAPI);
+app.use('/api/0.1/dronePart', dronePartAPI);
 
 // error handlers
 app.use(function(error, req, res, next){

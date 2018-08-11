@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var dronePartSpecSchema = new Schema({
   height:         { type: Number },
   width:          { type: Number },
-  lenght:         { type: Number },
+  length:         { type: Number },
   weight:         { type: Number },
   voltsMin:       { type: Number },
   voltsMax:       { type: Number },
@@ -47,9 +47,9 @@ var dronePartSchema = new Schema({
     company:        { type: String },
     datePublished:  { type: String },
 
-    sellers:        { dronePartSellerSchema },
-    specs:          { dronePartSpecSchema },
-    images:         { dronePartImageSchema },
+    sellers:        dronePartSellerSchema,
+    specs:          dronePartSpecSchema,
+    images:         [ dronePartImageSchema ],
 
     dateCreated:    { type: Date, default: Date.now },
     dateModified:   { type: Date }
@@ -67,38 +67,45 @@ var dronePartModel = db.model('dronePart', dronePartSchema);
 
 //CREATE new dronePart
 function createdronePart(dronePart, callbacks){
-    var specs = new dronePartSpecSchema ({
-        height:         dronePart.height,
-        width:          dronePart.width,
-        lenght:         dronePart.lenght,
-        weight:         dronePart.weight,
-        voltsMin:       dronePart.voltsMin,
-        voltsMax:       dronePart.voltsMax,
-        amps:           dronePart.amps,
-        ampsMax:        dronePart.ampsMax,
-        firware:        dronePart.firware
-    });
+    // var specs = new dronePartSpecSchema ({
+    //     height:         dronePart.height,
+    //     width:          dronePart.width,
+    //     length:         dronePart.length,
+    //     weight:         dronePart.weight,
+    //     voltsMin:       dronePart.voltsMin,
+    //     voltsMax:       dronePart.voltsMax,
+    //     amps:           dronePart.amps,
+    //     ampsMax:        dronePart.ampsMax,
+    //     firware:        dronePart.firware
+    // });
+    //
+    // var images = new dronePartImageSchema ({
+    //     title:          dronePart.imageTitle,
+    //     type:           dronePart.imageType,
+    //     path:           dronePart.imagePath
+    // });
 
-    var images = new dronePartImageSchema ({
-        title:          dronePart.imageTitle,
-        type:           dronePart.imageType,
-        path:           dronePart.imagePath
-    });
+    console.info(dronePart);
+    //
+    // var part = new dronePartModel({
+    //     name:           dronePart.name,
+    //     description:    dronePart.description,
+    //     category:       dronePart.category,
+    //     brand:          dronePart.brand,
+    //     company:        dronePart.company,
+    //     datePublished:  dronePart.datePublished,
+    //     // specs:          { specs },
+    //     // images:         { images }
+    //     specs:          dronePart.specs,
+    //     images:         dronePart.images
+    // });
 
-    var part = new dronePartModel({
-        name:           dronePart.name,
-        description:    dronePart.description,
-        category:       dronePart.category,
-        brand:           dronePart.brand,
-        company:         dronePart.company,
-        datePublished:   dronePart.datePublished,
-        specs:           { specs },
-        images:          { images }
-    });
+
+        var part = new dronePartModel(dronePart);
 
     part.save(function (err) {
         if (!err) {
-            if(!isInTest) console.log("[ADD]   dronePart created with id: " + f._id);
+            if(!isInTest) console.log("[ADD]   dronePart created with id: " + dronePart._id);
             callbacks.success(part);
         } else {
             if(!isInTest) console.log(err);
