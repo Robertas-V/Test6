@@ -11,19 +11,19 @@ block content
                 
             #blur.ng-hide(ng-show="editing && !loading || showLogInForm")
 
-            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.ng-hide(ng-controller="TableController", ng-show="loggedIn", ng-init="update_fruits()")
+            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp(ng-controller="DronePartTableController", ng-init="update_droneParts()")
                 thead
                     tr
                         th.mdl-data-table__cell--non-numeric ID
                         th.mdl-data-table__cell--non-numeric !{t('index.table.name')}
                         th.mdl-data-table__cell--non-numeric !{t('index.table.description')}
-                        th !{t('index.table.price')}
+                        th !{t('Category')}
                         th !{t('index.table.date')}
-                tbody
-                tbody(ng-repeat="f in fruit_list")   
-                    tr(ng-click="fruitClick(f._id)")
+
+                tbody(ng-repeat="f in dronePart_list")   
+                    tr(ng-click="dronePartClick(f._id)")
                         td(class="mdl-data-table__cell--non-numeric", id="id") {{f._id}}
                         td(class="mdl-data-table__cell--non-numeric") {{f.name}}
                         td(class="mdl-data-table__cell--non-numeric") {{f.description}}
-                        td {{f.price/100 | currency}}
-                        td {{f.dateCreated | date:"dd/MM/yyyy 'at' h:mma"}}
+                        td(class="mdl-data-table__cell--non-numeric") {{f.category}}
+                        td {{f.dateCreated | date:"yyyy-MM-dd 'at' hh:mm"}}

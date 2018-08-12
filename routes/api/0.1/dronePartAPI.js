@@ -56,7 +56,7 @@ router.post('/newPart', function (req, res){
 });
 
 //READ all droneParts
-router.get('/parts', function(req, res, next) {
+router.get('/', function(req, res, next) {
     var d = domain.create();
     var skip = req.query.skip;
     var count = req.query.count;
@@ -79,7 +79,7 @@ router.get('/parts', function(req, res, next) {
 });
 
 //READ dronePart by id
-router.get('/part:id', function (req, res){
+router.get('/parts:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);
@@ -100,7 +100,7 @@ router.get('/part:id', function (req, res){
 });
 
 //UPDATE dronePart
-router.put('/part:id', function (req, res){
+router.put('/parts:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);
@@ -147,7 +147,7 @@ router.put('/part:id', function (req, res){
 });
 
 //DELETE dronePart
-router.delete('/part:id', function (req, res){
+router.delete('/parts:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);

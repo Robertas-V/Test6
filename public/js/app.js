@@ -1,4 +1,13 @@
-var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitService', 'FruitApp.UserService', 'FruitApp.LoginController', 'FruitApp.TableController', 'FruitApp.CardController'])
+var app = angular.module('FruitApp', [
+  'ngRoute',
+  'ngResource',
+  'FruitApp.FruitService',
+  'FruitApp.UserService',
+  'FruitApp.DronePartService',
+  'FruitApp.LoginController',
+  'FruitApp.TableController',
+  'FruitApp.CardController',
+  'FruitApp.DronePartTableController'])
 .controller('MainController',  ['$scope', '$http', function ($scope, $http) {
     //State vars initialization
     $scope.loading = true;

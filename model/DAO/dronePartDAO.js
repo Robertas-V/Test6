@@ -63,7 +63,7 @@ dronePartSchema.pre('save', function(next){
     // }
     next();
 });
-var dronePartModel = db.model('dronePart', dronePartSchema);
+var dronePartModel = db.model('droneparts', dronePartSchema);
 
 //CREATE new dronePart
 function createdronePart(dronePart, callbacks){
@@ -116,8 +116,8 @@ function createdronePart(dronePart, callbacks){
 
 //READ all droneParts
 function readdroneParts(skip, count, callbacks){
-    return dronePartModel.find()
-    .sort('-dateCreated').skip(skip).limit(count).exec('find', function (err, droneParts) {
+    return dronePartModel.find().sort('-dateCreated').skip(skip).limit(count)
+    .exec('find', function (err, droneParts) {
         if (!err) {
             if(!isInTest) console.log('[GET]   Get droneParts: ' + droneParts.length);
             callbacks.success(droneParts);
