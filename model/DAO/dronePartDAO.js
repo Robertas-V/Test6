@@ -14,7 +14,7 @@ var dronePartSpecSchema = new Schema({
   voltsMax:       { type: Number },
   amps:           { type: Number },
   ampsMax:        { type: Number },
-  firware:        { type: String }
+  firmware:        { type: String }
 });
 
 var dronePartImageSchema = new Schema({
@@ -23,6 +23,14 @@ var dronePartImageSchema = new Schema({
   path:           { type: String },
   dateCreated:    { type: Date, default: Date.now }
 });
+
+var dronePartRatingSchema = new Schema({
+  category:       { type: String },
+  rating:         { type: Number },
+  dateCreated:    { type: Date, default: Date.now }
+});
+
+// Question and answers section (user posts)
 
 var dronePartPriceSchema = new Schema({
   price:          { type: Number },
@@ -50,6 +58,7 @@ var dronePartSchema = new Schema({
     sellers:        dronePartSellerSchema,
     specs:          dronePartSpecSchema,
     images:         [ dronePartImageSchema ],
+    ratings:        [ dronePartRatingSchema ],
 
     dateCreated:    { type: Date, default: Date.now },
     dateModified:   { type: Date }
@@ -76,7 +85,7 @@ function createdronePart(dronePart, callbacks){
     //     voltsMax:       dronePart.voltsMax,
     //     amps:           dronePart.amps,
     //     ampsMax:        dronePart.ampsMax,
-    //     firware:        dronePart.firware
+    //     firmware:        dronePart.firmware
     // });
     //
     // var images = new dronePartImageSchema ({
@@ -115,8 +124,10 @@ function createdronePart(dronePart, callbacks){
 }
 
 //READ all droneParts
-function readdroneParts(skip, count, callbacks){
-    return dronePartModel.find().sort('-dateCreated').skip(skip).limit(count)
+function readdroneParts(category, skip, count, callbacks){
+    filter = (category !== undefined) ? {"category": category} : {};
+
+    return dronePartModel.find(filter).sort('-dateCreated').skip(skip).limit(count)
     .exec('find', function (err, droneParts) {
         if (!err) {
             if(!isInTest) console.log('[GET]   Get droneParts: ' + droneParts.length);
@@ -160,7 +171,7 @@ function updatedronePart(id, dronePart, callbacks){
             part.specs.voltsMax = dronePart.specs.voltsMax;
             part.specs.amps     = dronePart.specs.amps;
             part.specs.ampsMax  = dronePart.specs.ampsMax;
-            part.specs.firware  = dronePart.specs.firware;
+            part.specs.firmware  = dronePart.specs.firmware;
 
             if (dronePart.images.imageTitle) part.images.imageTitle = dronePart.images.imageTitle;
             if (dronePart.images.type) part.images.type = dronePart.images.type;

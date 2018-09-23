@@ -22,10 +22,11 @@ router.post('/newPart', function (req, res){
             voltsMax:       req.body.voltsMax,
             amps:           req.body.amps,
             ampsMax:        req.body.ampsMax,
-            firware:        req.body.firware
+            firmware:        req.body.firmware
         });
 
         var images = [];
+        var ratings = [];
 
         if (req.body.imagePath !== undefined){
             images.add({
@@ -43,7 +44,8 @@ router.post('/newPart', function (req, res){
                 company:        req.body.company,
                 datePublished:  req.body.datePublished,
                 specs:          specs,
-                images:         images
+                images:         images,
+                ratings:        ratings
             }, {
             success: function(f){
                 res.status(201).send({msg: 'dronePart created succesfully: '+req.body.name, data: f});
@@ -60,6 +62,8 @@ router.get('/', function(req, res, next) {
     var d = domain.create();
     var skip = req.query.skip;
     var count = req.query.count;
+    var category = req.query.category;
+    console.log(req.query);
 
     d.on('error', function(error){
         console.log(error.stacktrace);
@@ -67,7 +71,7 @@ router.get('/', function(req, res, next) {
     });
 
     d.run(function(){
-        dronePartDAO.readdroneParts(skip, count, {
+        dronePartDAO.readdroneParts(category, skip, count, {
             success: function(droneParts){
                 res.status(200).send(JSON.stringify(droneParts));
             },
@@ -99,6 +103,40 @@ router.get('/parts:id', function (req, res){
     });
 });
 
+
+
+//READ dronePart by category
+router.get('/:category', function (req, res){
+    var d = domain.create();
+    d.on('error', function(error){
+        console.log(error.stacktrace);
+        res.status(500).send({'error': error.message});
+
+    });
+
+    d.run(function(){
+        dronePartDAO.readdroneParts(req.params.category, req.params.skip, req.params.count, {
+            success: function(droneParts){
+                res.status(200).send(JSON.stringify(droneParts));
+            },
+            error: function(err){
+                res.status(500).send(err);
+            }
+        });
+    });
+
+    // d.run(function(){
+    //     dronePartDAO.readdronePartById(req.params.id ,{
+    //         success: function(dronePart){
+    //             res.status(200).send(JSON.stringify(dronePart));
+    //         },
+    //         error: function(err){
+    //             res.status(404).send(err);
+    //         }
+    //     });
+    // });
+});
+
 //UPDATE dronePart
 router.put('/parts:id', function (req, res){
     var d = domain.create();
@@ -117,7 +155,7 @@ router.put('/parts:id', function (req, res){
               voltsMax:       req.body.voltsMax,
               amps:           req.body.amps,
               ampsMax:        req.body.ampsMax,
-              firware:        req.body.firware
+              firmware:        req.body.firmware
           });
 
           var images = ({

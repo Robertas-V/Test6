@@ -97,7 +97,7 @@ body header{
 
 .clearfix{
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 75px 0 auto 55px;
 }
 
 
@@ -115,7 +115,7 @@ section.main table{
     /*
     max-width: 1000px;
     */
-    margin: 150px auto 0 auto;
+    margin: 0 auto;
 }
 
 section.main .left, section.main .right{
@@ -599,4 +599,26 @@ tbody tr{
 
 #menu a{
   text-decoration: none;
+}
+
+.text-box {
+    background-color: #0000004f;
+    padding: 15px;
+    color: #ececec;
+}
+
+.hstyle {
+    padding: 10px 20px !important;
+    margin: 15px auto 0 auto !important;
+    display: inline-block !important;
+}
+
+h2.hstyle {
+    background-color: #00000075;
+    color: #009688 !important;
+}
+
+h3.hstyle {
+    background-color: #00968880;
+    color: #062724 !important;
 }

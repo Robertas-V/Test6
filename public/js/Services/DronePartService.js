@@ -3,10 +3,18 @@ angular.module('FruitApp.DronePartService', [])
     return $resource(
         '/api/0.1/dronePart/:id', {
             id: '@id'
+        },
+        '/api/0.1/dronePart/:category', {
+            category: '@category'
         }, {
         //     query: {
         //         method: 'GET',
-        //         isArray: false
+        //         url: '/api/0.1/user/login',
+        //         params: {
+        //             username: '@username',
+        //             password: '@password'
+        //         }
+        //         // isArray: false
         //     }
         // }, {
             update: {

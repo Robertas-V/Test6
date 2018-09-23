@@ -10,7 +10,7 @@ var app = angular.module('FruitApp', [
   'FruitApp.DronePartTableController'])
 .controller('MainController',  ['$scope', '$http', function ($scope, $http) {
     //State vars initialization
-    $scope.loading = true;
+    $scope.loading = false;
     $scope.loggedIn = getCookie('username') !== "";
     $scope.fruit={};
     $scope.editing = false;
