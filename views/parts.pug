@@ -11,7 +11,7 @@ block content
                 
             #blur.ng-hide(ng-show="editing && !loading || showLogInForm")
 
-            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp(ng-controller="DronePartTableController", ng-init="update_droneParts()")
+            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp(ng-controller="DronePartTableController", ng-init="DPTC_getTopDroneParts()")
                 thead
                     tr
                         th.mdl-data-table__cell--non-numeric ID

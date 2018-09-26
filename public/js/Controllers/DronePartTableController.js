@@ -1,10 +1,11 @@
 angular.module('FruitApp.DronePartTableController', [])
 .controller('DronePartTableController', ['$scope', 'DronePartFactory', function ($scope, DronePartFactory) {
-    //Update droneParts
-    $scope.$parent.update_droneParts = function(category){
+
+    //Get TOP droneParts
+    $scope.$parent.DPTC_getTopDroneParts = function(){
         $scope.$parent.loading = true;
         //Load droneParts
-        DronePartFactory.query(category).$promise.then(function(response) {
+        DronePartFactory.query().$promise.then(function(response) {
             //$('tbody').html('');
             $scope.$parent.dronePart_list = response;
             $scope.$parent.loading = false;
@@ -29,8 +30,6 @@ angular.module('FruitApp.DronePartTableController', [])
             //error
             console.error(response);
         });
-
-
     };
 
 
