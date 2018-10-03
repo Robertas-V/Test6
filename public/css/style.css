@@ -615,12 +615,12 @@ tbody tr{
 .hstyle {
     padding: 10px 20px !important;
     margin: 15px auto 0 auto !important;
-    display: inline-block !important;
 }
 
 h2.hstyle {
     background-color: #00000075;
     color: #009688 !important;
+    display: inline-block !important;
 }
 
 h3.hstyle {

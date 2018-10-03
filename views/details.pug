@@ -11,6 +11,24 @@ block content
                 
             #blur.ng-hide(ng-show="editing && !loading || showLogInForm")
             
-            h2.hstyle Some Part details
-            .form_box
-                div(ng-controller="DronePartTableController", ng-init="DPTC_getTopDroneParts()")
+            div(ng-controller="DronePartTableController", ng-init="DPTC_getDronePartById('" + id + "')")
+                h2.hstyle {{ dronePart.name }} details
+                
+                h3.hstyle Description
+                .text-box
+                    p This {{ dronePart.category }} was developed by {{ dronePart.brand }} and published on {{ dronePart.datePublished }}.
+                    p {{ dronePart.description }}
+                    
+                h3.hstyle Specs
+                .form_box  
+                    table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+                        thead
+                            tr
+                                th.mdl-data-table__cell--non-numeric Key
+                                th.mdl-data-table__cell--non-numeric Value
+
+                        tbody(ng-repeat="(key, value) in dronePart")   
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{key}}
+                                td(class="mdl-data-table__cell--non-numeric") {{value}}
+                
