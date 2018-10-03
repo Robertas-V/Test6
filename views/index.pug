@@ -19,6 +19,33 @@ block content
             h3.hstyle Win prizes every month!
             .text-box
                 p You can win the top drone parts by simply contributing to our website.
+            
+            .demo-card-wide.mdl-card.mdl-shadow--2dp.ng-hide(ng-show="editing && !loading")
+                .mdl-card__title
+                    h2.mdl-card__title-text {{fruit.name || "Insert data"}}
+
+                .mdl-card__supporting-text
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.name")
+                        label.mdl-textfield__label !{t('index.card.name')}
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.description")
+                        label.mdl-textfield__label !{t('index.card.description')}
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.price")
+                        label.mdl-textfield__label !{t('index.card.price')}
+
+                .mdl-card__actions.mdl-card--border
+                    a#delete-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.mdl-js-ripple-effect(ng-click="delete_card(fruit._id)", ng-show="fruit._id")
+                        | !{t('index.card.delete')}
+                    a#save-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.mdl-js-ripple-effect(ng-click="save_fruit()")
+                        | !{t('index.card.save')}
+
+                .mdl-card__menu
+                    button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect(ng-click="close_card()")
+                        i.material-icons close
                 
             div(ng-controller="DronePartTableController", ng-init="DPTC_getTopDroneParts()")
                 h2.hstyle Top 3 FC    

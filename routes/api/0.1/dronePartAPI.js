@@ -83,7 +83,7 @@ router.get('/', function(req, res, next) {
 });
 
 //READ dronePart by id
-router.get('/parts:id', function (req, res){
+router.get('/:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);
@@ -138,7 +138,7 @@ router.get('/:category', function (req, res){
 });
 
 //UPDATE dronePart
-router.put('/parts:id', function (req, res){
+router.put('/:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);
@@ -185,7 +185,7 @@ router.put('/parts:id', function (req, res){
 });
 
 //DELETE dronePart
-router.delete('/parts:id', function (req, res){
+router.delete('/:id', function (req, res){
     var d = domain.create();
     d.on('error', function(error){
         console.log(error.stacktrace);

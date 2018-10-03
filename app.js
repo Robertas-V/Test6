@@ -8,6 +8,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var routesDetails = require('./routes/details');
 var userAPI = require('./routes/api/0.1/userAPI');
 var fruitAPI = require('./routes/api/0.1/fruitAPI');
 var dronePartAPI = require('./routes/api/0.1/dronePartAPI');
@@ -41,7 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 console.info('Environment: ' + app.get('env'));
 
-app.use('/', routes);
+app.use(require('./routes'));
+//app.use('/', routes);
+//app.use('/details', routesDetails);
 app.use('/api/0.1/user', userAPI);
 app.use('/api/0.1/fruit', fruitAPI);
 app.use('/api/0.1/dronePart', dronePartAPI);

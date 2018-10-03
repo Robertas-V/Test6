@@ -30,4 +30,5 @@ var app = angular.module('FruitApp', [
         delete_cookie('username');
         location.reload();
     };
+
 }]);
