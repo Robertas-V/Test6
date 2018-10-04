@@ -22,6 +22,54 @@ block content
                 h3.hstyle Specs
                 .form_box  
                     table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+                        tbody  
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Weight
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.weight }} g
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Height X  X Length
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.height }} mm X {{ dronePart.specs.width }} mm X {{ dronePart.specs.length }} mm
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Mounting Width X Length
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.mountWidth }} mm X {{ dronePart.specs.mountLength }} mm
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Voltage input
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.voltsMin }}-{{ dronePart.specs.voltsMax }} {{ dronePart.specs.voltMetric }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Current A (Constant / Peak)
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.ampsConstant }} A / {{ dronePart.specs.ampsPeak }} A
+                                
+                h3.hstyle Features
+                .form_box  
+                    table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+                        tbody  
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Firmware
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.supportedFirmware }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") Protocols
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.supportProtocols }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") BEC
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.BEC }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") OSD
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.OSD }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") VBat
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.voltageMonitor }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") CRT
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.currentMonitor }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") External Buzzer
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.externalBuzzer }}
+                            tr
+                                td(class="mdl-data-table__cell--non-numeric") LED Strip
+                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.LEDStrip }}
+                                
+                
+                    table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
                         thead
                             tr
                                 th.mdl-data-table__cell--non-numeric Key

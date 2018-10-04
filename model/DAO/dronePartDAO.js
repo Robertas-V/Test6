@@ -6,15 +6,29 @@ var isInTest = typeof global.it === 'function';
 var Schema = mongoose.Schema;
 
 var dronePartSpecSchema = new Schema({
+  weight:         { type: Number },
   height:         { type: Number },
   width:          { type: Number },
   length:         { type: Number },
-  weight:         { type: Number },
+  mountWidth:     { type: Number },
+  mountLength:    { type: Number },
   voltsMin:       { type: Number },
   voltsMax:       { type: Number },
-  amps:           { type: Number },
-  ampsMax:        { type: Number },
-  firmware:        { type: String }
+  voltMetric:     { type: String },
+  ampsConstant:   { type: Number },
+  ampsPeak:       { type: Number },
+  firmware:       { type: String }
+});
+
+var dronePartFeatureSchema = new Schema({
+  supportedFirmware: { type: String },
+  supportProtocols:  { type: String },
+  voltageMonitor:    { type: Boolean },
+  currentMonitor:    { type: Boolean },
+  OSD:               { type: Boolean },
+  BEC:               { type: String },
+  externalBuzzer:    { type: Boolean },
+  LEDStrip:          { type: Boolean }
 });
 
 var dronePartImageSchema = new Schema({
@@ -57,6 +71,7 @@ var dronePartSchema = new Schema({
 
     sellers:        dronePartSellerSchema,
     specs:          dronePartSpecSchema,
+    features:       dronePartFeatureSchema,
     images:         [ dronePartImageSchema ],
     ratings:        [ dronePartRatingSchema ],
 
