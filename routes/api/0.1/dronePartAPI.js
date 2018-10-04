@@ -124,17 +124,6 @@ router.get('/:category', function (req, res){
             }
         });
     });
-
-    // d.run(function(){
-    //     dronePartDAO.readdronePartById(req.params.id ,{
-    //         success: function(dronePart){
-    //             res.status(200).send(JSON.stringify(dronePart));
-    //         },
-    //         error: function(err){
-    //             res.status(404).send(err);
-    //         }
-    //     });
-    // });
 });
 
 //UPDATE dronePart

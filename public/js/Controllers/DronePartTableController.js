@@ -16,29 +16,14 @@ angular.module('FruitApp.DronePartTableController', [])
         });
     };
 
-
+    // Jump to details page
     $scope.$parent.dronePartClick =  function(id) {
-        // $location.path("details");
-        window.location.href = 'details/' + id;
-
-        //window.location.href = '/details/id=' + id;
-        // $location.url = '/details/?id=' + id;
-        // $location.url('details/?id=' + id);
-        // $scope.$parent.loading = true;
+        $scope.$parent.loading = true;
         // $scope.$parent.editing = true;
 
-        // DronePartFactory.get({id: id},
-        //     function(response) {
-        //         console.log(response);
-        //         $scope.$parent.dronePart = response;
-        //         $scope.$parent.loading = false;
-        //
-        //         //Floating label layout fix
-        //         $('.mdl-textfield').addClass('is-focused');
-        //     }, function(response) {
-        //         //error
-        //         console.error(response);
-        // });
+        // $location.path("details/" + id);
+        // $location.url("details/" + id);
+        window.location.href = 'details/' + id;
     };
 
     // Get drone part details by ID
@@ -58,7 +43,6 @@ angular.module('FruitApp.DronePartTableController', [])
                 console.error(response);
         });
     };
-
 
 
     $scope.$parent.get_dronePartsByCategory = function(category){
@@ -89,7 +73,5 @@ angular.module('FruitApp.DronePartTableController', [])
             //error
             console.error(response);
         });
-
-
     };
 }]);
