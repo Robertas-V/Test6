@@ -12,78 +12,91 @@ block content
             #blur.ng-hide(ng-show="editing && !loading || showLogInForm")
             
             h2.hstyle Add new product
-            .form_box
+            .form_box.mdl-shadow--2dp(ng-controller="DronePartTableController")
                 form(action='#')
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample1.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample1') Category
-                            
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
+                    .mdl-card__supporting-text
+                        .text_box
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryFC')
+                                input#radioCategoryFC.mdl-radio__button(checked='', name='category', type='radio', value='FC')
+                                span.mdl-radio__label FC
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryESC')
+                                input#radioCategoryESC.mdl-radio__button(name='category', type='radio', value='ESC')
+                                span.mdl-radio__label ESC
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryCAM')
+                                input#radioCategoryCAM.mdl-radio__button(name='category', type='radio', value='CAM')
+                                span.mdl-radio__label CAM
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryVTX')
+                                input#radioCategoryVTX.mdl-radio__button(name='category', type='radio', value='VTX')
+                                span.mdl-radio__label VTX
+                                
+                        
+                        .text_box.mdl-textfield.mdl-js-textfield
                             input#sample2.mdl-textfield__input(type='text')
                             label.mdl-textfield__label(for='sample2') Name
 
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            textarea#sample3.mdl-textfield__input(type='text', rows='3')
-                            label.mdl-textfield__label(for='sample3') Description...
-                            
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample4.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample4') Brand
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample5.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample5') Company
-                    
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample6.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample6') Date published
-
-
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample7.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample7') Height
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample8.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample8') Width
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample9.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample9') Length
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample10.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample10') Weight
-
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample11.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample11') Min volts
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample12.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample12') Max volts
-
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample13.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample13') Amps
-                    
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample14.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample14') Burst amps
-                
-                    .text_box
-                        .mdl-textfield.mdl-js-textfield
-                            input#sample15.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample15') Firmware
-                            
-                    button.mdl-button.mdl-js-button.mdl-button--raised
-                        | Upload image
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                textarea#sample3.mdl-textfield__input(type='text', rows='3')
+                                label.mdl-textfield__label(for='sample3') Description...
+                                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample4.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample4') Brand
                         
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample5.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample5') Company
+                        
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample6.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample6') Date published
+
+
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample7.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample7') Height
+                        
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample8.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample8') Width
+                        
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample9.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample9') Length
+                        
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample10.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample10') Weight
+
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample11.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample11') Min volts
+                        
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample12.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample12') Max volts
+
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample13.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample13') Amps
+                        
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample14.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample14') Burst amps
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#sample15.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='sample15') Firmware
+                                
+                        button.mdl-button.mdl-js-button.mdl-button--raised
+                            | Upload image
+                        
+                    .mdl-card__actions.mdl-card--border
+                        a#save-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.mdl-js-ripple-effect(ng-click="add_new_part()")
+                            | !{t('index.card.save')}

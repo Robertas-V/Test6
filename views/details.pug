@@ -24,49 +24,50 @@ block content
                     table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
                         tbody  
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Weight
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.weight }} g
+                                td.mdl-data-table__cell--non-numeric Weight
+                                td.mdl-data-table__cell--non-numeric
+                                    input.mdl-textfield__input.edit_box(type="text", ng-model="dronePart.specs.weight")
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Height X  X Length
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.height }} mm X {{ dronePart.specs.width }} mm X {{ dronePart.specs.length }} mm
+                                td.mdl-data-table__cell--non-numeric Height X Width X Length
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.height }} mm X {{ dronePart.specs.width }} mm X {{ dronePart.specs.length }} mm
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Mounting Width X Length
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.mountWidth }} mm X {{ dronePart.specs.mountLength }} mm
+                                td.mdl-data-table__cell--non-numeric Mounting Width X Length
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.mountWidth }} mm X {{ dronePart.specs.mountLength }} mm
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Voltage input
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.voltsMin }}-{{ dronePart.specs.voltsMax }} {{ dronePart.specs.voltMetric }}
+                                td.mdl-data-table__cell--non-numeric Voltage input
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.voltsMin }}-{{ dronePart.specs.voltsMax }} {{ dronePart.specs.voltMetric }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Current A (Constant / Peak)
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.specs.ampsConstant }} A / {{ dronePart.specs.ampsPeak }} A
+                                td.mdl-data-table__cell--non-numeric Current A (Constant / Peak)
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.ampsConstant }} A / {{ dronePart.specs.ampsPeak }} A
                                 
                 h3.hstyle Features
                 .form_box  
                     table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
                         tbody  
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Firmware
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.supportedFirmware }}
+                                td.mdl-data-table__cell--non-numeric Firmware
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportedFirmware }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") Protocols
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.supportProtocols }}
+                                td.mdl-data-table__cell--non-numeric Protocols
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportProtocols }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") BEC
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.BEC }}
+                                td.mdl-data-table__cell--non-numeric BEC
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.BEC }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") OSD
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.OSD }}
+                                td.mdl-data-table__cell--non-numeric OSD
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.OSD }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") VBat
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.voltageMonitor }}
+                                td.mdl-data-table__cell--non-numeric VBat
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.voltageMonitor }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") CRT
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.currentMonitor }}
+                                td.mdl-data-table__cell--non-numeric CRT
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.currentMonitor }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") External Buzzer
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.externalBuzzer }}
+                                td.mdl-data-table__cell--non-numeric External Buzzer
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.externalBuzzer }}
                             tr
-                                td(class="mdl-data-table__cell--non-numeric") LED Strip
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{ dronePart.features.LEDStrip }}
+                                td.mdl-data-table__cell--non-numeric LED Strip
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.LEDStrip }}
                                 
                                 
                 h3.hstyle Debug
@@ -79,6 +80,6 @@ block content
 
                         tbody(ng-repeat="(key, value) in dronePart")   
                             tr
-                                td(class="mdl-data-table__cell--non-numeric", id="key") {{key}}
-                                td(class="mdl-data-table__cell--non-numeric") {{value}}
+                                td.mdl-data-table__cell--non-numeric {{key}}
+                                td.mdl-data-table__cell--non-numeric {{value}}
                 

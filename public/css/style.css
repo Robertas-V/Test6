@@ -608,8 +608,12 @@ tbody tr{
 }
 
 .form_box {
-    background-color: #f5f5f5c4;
+    background-color: #f5f5f5d9;
     padding: 20px;
+}
+
+.edit_box {
+  background-color: #fafab9;
 }
 
 .hstyle {
@@ -626,4 +630,8 @@ h2.hstyle {
 h3.hstyle {
     background-color: #00968880;
     color: #062724 !important;
+}
+
+.mdl-radio__label {
+    margin-right: 25px;
 }
