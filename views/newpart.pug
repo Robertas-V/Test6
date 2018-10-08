@@ -16,83 +16,140 @@ block content
                 form(action='#')
                     .mdl-card__supporting-text
                         .text_box
-                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryFC')
-                                input#radioCategoryFC.mdl-radio__button(checked='', name='category', type='radio', value='FC')
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryFC')
+                                input#partCategoryFC.mdl-radio__button(ng-checked='true', name='category', type='radio', value='FC', ng-model="newDronePart.category")
                                 span.mdl-radio__label FC
-                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryESC')
-                                input#radioCategoryESC.mdl-radio__button(name='category', type='radio', value='ESC')
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryESC')
+                                input#partCategoryESC.mdl-radio__button(name='category', type='radio', value='ESC', ng-model="newDronePart.category")
                                 span.mdl-radio__label ESC
-                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryCAM')
-                                input#radioCategoryCAM.mdl-radio__button(name='category', type='radio', value='CAM')
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryCAM')
+                                input#partCategoryCAM.mdl-radio__button(name='category', type='radio', value='CAM', ng-model="newDronePart.category")
                                 span.mdl-radio__label CAM
-                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='radioCategoryVTX')
-                                input#radioCategoryVTX.mdl-radio__button(name='category', type='radio', value='VTX')
+                            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryVTX')
+                                input#partCategoryVTX.mdl-radio__button(name='category', type='radio', value='VTX', ng-model="newDronePart.category")
                                 span.mdl-radio__label VTX
                                 
                         
                         .text_box.mdl-textfield.mdl-js-textfield
-                            input#sample2.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='sample2') Name
+                            input#partName.mdl-textfield__input(type='text', ng-model="newDronePart.name")
+                            label.mdl-textfield__label(for='partName') Name
 
                         .text_box
                             .mdl-textfield.mdl-js-textfield
-                                textarea#sample3.mdl-textfield__input(type='text', rows='3')
-                                label.mdl-textfield__label(for='sample3') Description...
+                                textarea#partDescription.mdl-textfield__input(type='text', rows='3', ng-model="newDronePart.description")
+                                label.mdl-textfield__label(for='partDescription') Description...
                                     
                         .text_box
                             .mdl-textfield.mdl-js-textfield
-                                input#sample4.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample4') Brand
+                                input#partBrand.mdl-textfield__input(type='text', ng-model="newDronePart.brand")
+                                label.mdl-textfield__label(for='partBrand') Brand
                         
                             .mdl-textfield.mdl-js-textfield
-                                input#sample5.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample5') Company
+                                input#partCompany.mdl-textfield__input(type='text', ng-model="newDronePart.company")
+                                label.mdl-textfield__label(for='partCompany') Company
                         
                         .text_box
                             .mdl-textfield.mdl-js-textfield
-                                input#sample6.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample6') Date published
+                                input#partDatePublished.mdl-textfield__input(type='text', ng-model="newDronePart.datePublished")
+                                label.mdl-textfield__label(for='partDatePublished') Date published
 
 
                         .text_box
                             .mdl-textfield.mdl-js-textfield
-                                input#sample7.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample7') Height
+                                input#partWeight.mdl-textfield__input(type='text', ng-model="newDronePart.specs.weight")
+                                label.mdl-textfield__label(for='partWeight') Weight (g)
+                                
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partHeight.mdl-textfield__input(type='text', ng-model="newDronePart.specs.height")
+                                label.mdl-textfield__label(for='partHeight') Height (mm)
                         
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample8.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample8') Width
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partWidth.mdl-textfield__input(type='text', ng-model="newDronePart.specs.width")
+                                label.mdl-textfield__label(for='partWidth') Width (mm)
                         
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample9.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample9') Length
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partLength.mdl-textfield__input(type='text', ng-model="newDronePart.specs.length")
+                                label.mdl-textfield__label(for='partLength') Length (mm)
+                                
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partMountWidth.mdl-textfield__input(type='text', ng-model="newDronePart.specs.mountWidth")
+                                label.mdl-textfield__label(for='partMountWidth') Mount Width
                         
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample10.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample10') Weight
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partMountLength.mdl-textfield__input(type='text', ng-model="newDronePart.specs.mountLength")
+                                label.mdl-textfield__label(for='partMountLength') Mount Length
 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample11.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample11') Min volts
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partVoltsMin.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltsMin")
+                                label.mdl-textfield__label(for='partVoltsMin') Min volts
                         
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample12.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample12') Max volts
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partVoltsMax.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltsMax")
+                                label.mdl-textfield__label(for='partVoltsMax') Max volts
+                        
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partVoltsMetric.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltMetric")
+                                label.mdl-textfield__label(for='partVoltsMetric') Volts Metric
 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample13.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample13') Amps
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partAmpsConstant.mdl-textfield__input(type='text', ng-model="newDronePart.specs.ampsConstant")
+                                label.mdl-textfield__label(for='partAmpsConstant') Amps (Cons)
                         
-                            .mdl-textfield.mdl-js-textfield
-                                input#sample14.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample14') Burst amps
+                            .mdl-textfield.mdl-js-textfield.short_text_field
+                                input#partAmpsPeak.mdl-textfield__input(type='text', ng-model="newDronePart.specs.ampsPeak")
+                                label.mdl-textfield__label(for='partAmpsPeak') Amps (Burst)
                     
                         .text_box
                             .mdl-textfield.mdl-js-textfield
-                                input#sample15.mdl-textfield__input(type='text')
-                                label.mdl-textfield__label(for='sample15') Firmware
+                                input#partFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.specs.firmware")
+                                label.mdl-textfield__label(for='partFirmware') Firmware
+                                
+                                
+                                
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partSupportedFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.features.supportedFirmware")
+                                label.mdl-textfield__label(for='partSupportedFirmware') Supported Firmwares
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partSupportProtocols.mdl-textfield__input(type='text', ng-model="newDronePart.features.supportProtocols")
+                                label.mdl-textfield__label(for='partSupportProtocols') Supported Protocols
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partVoltageMonitor.mdl-textfield__input(type='text', ng-model="newDronePart.features.voltageMonitor")
+                                label.mdl-textfield__label(for='partVoltageMonitor') Voltage Monitor
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partCurrentMonitor.mdl-textfield__input(type='text', ng-model="newDronePart.features.currentMonitor")
+                                label.mdl-textfield__label(for='partCurrentMonitor') Current Monitor
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partOSD.mdl-textfield__input(type='text', ng-model="newDronePart.features.OSD")
+                                label.mdl-textfield__label(for='partOSD') OSD
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partBEC.mdl-textfield__input(type='text', ng-model="newDronePart.features.BEC")
+                                label.mdl-textfield__label(for='partBEC') BEC
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partExternalBuzzer.mdl-textfield__input(type='text', ng-model="newDronePart.features.externalBuzzer")
+                                label.mdl-textfield__label(for='partExternalBuzzer') Externa Buzzer
+                    
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield
+                                input#partLEDStrip.mdl-textfield__input(type='text', ng-model="newDronePart.features.LEDStrip")
+                                label.mdl-textfield__label(for='partLEDStrip') LED Strip
                                 
                         button.mdl-button.mdl-js-button.mdl-button--raised
                             | Upload image

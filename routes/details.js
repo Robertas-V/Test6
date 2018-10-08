@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     });
 
     d.run(function(){
-        res.render('details', { detailsType: 'New', title: 'Details'});
+        res.render('newPart', { detailsType: 'New', title: 'Details'});
     });
 });
 

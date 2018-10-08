@@ -607,6 +607,10 @@ tbody tr{
     color: #ececec;
 }
 
+.short_text_field {
+    width: 120px;
+}
+
 .form_box {
     background-color: #f5f5f5d9;
     padding: 20px;
