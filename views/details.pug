@@ -11,8 +11,9 @@ block content
                 
             #blur.ng-hide(ng-show="editing && !loading || showLogInForm")
             
-            div(ng-controller="DronePartTableController", ng-init="DPTC_getDronePartById('" + id + "')")
-                h2.hstyle {{ dronePart.name }} details
+            // Existing product details
+            div(ng-if="detailsType != 'New'", ng-controller="DronePartTableController", ng-init="DPTC_getDronePartById('" + id + "')")
+                h2.hstyle {{ dronePart.name }} details 
                 
                 h3.hstyle Description
                 .text-box
@@ -83,3 +84,64 @@ block content
                                 td.mdl-data-table__cell--non-numeric {{key}}
                                 td.mdl-data-table__cell--non-numeric {{value}}
                 
+            // New product details
+            div(ng-if="detailsType = 'New'", ng-controller="DronePartTableController")
+                
+                input#partName.hstyle.edit_box(type="text",ng-model="dronePart.name")
+                label.mdl-textfield__label(for='partName', ng-if="detailsType = 'New'") New Product Name
+
+                h3.hstyle Description
+                .text-box
+                    p This {{ dronePart.category }} was developed by {{ dronePart.brand }} and published on {{ dronePart.datePublished }}.
+                    p {{ dronePart.description }}
+                    
+                h3.hstyle Specs
+                .form_box  
+                    table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+                        tbody  
+                            tr
+                                td.mdl-data-table__cell--non-numeric Weight
+                                td.mdl-data-table__cell--non-numeric
+                                    input.mdl-textfield__input.edit_box(type="text", ng-model="dronePart.specs.weight")
+                            tr
+                                td.mdl-data-table__cell--non-numeric Height X Width X Length
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.height }} mm X {{ dronePart.specs.width }} mm X {{ dronePart.specs.length }} mm
+                            tr
+                                td.mdl-data-table__cell--non-numeric Mounting Width X Length
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.mountWidth }} mm X {{ dronePart.specs.mountLength }} mm
+                            tr
+                                td.mdl-data-table__cell--non-numeric Voltage input
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.voltsMin }}-{{ dronePart.specs.voltsMax }} {{ dronePart.specs.voltMetric }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric Current A (Constant / Peak)
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.ampsConstant }} A / {{ dronePart.specs.ampsPeak }} A
+                                
+                h3.hstyle Features
+                .form_box  
+                    table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+                        tbody  
+                            tr
+                                td.mdl-data-table__cell--non-numeric Firmware
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportedFirmware }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric Protocols
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportProtocols }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric BEC
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.BEC }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric OSD
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.OSD }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric VBat
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.voltageMonitor }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric CRT
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.currentMonitor }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric External Buzzer
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.externalBuzzer }}
+                            tr
+                                td.mdl-data-table__cell--non-numeric LED Strip
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.LEDStrip }}
+                                

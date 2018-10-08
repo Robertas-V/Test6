@@ -74,4 +74,39 @@ angular.module('FruitApp.DronePartTableController', [])
             console.error(response);
         });
     };
+
+    //
+    $scope.add_new_part = function(){
+        $scope.$parent.loading = true;
+        if($scope.$parent.fruit._id === undefined){
+            //Adding fruit -> POST
+            fruitFactory.save({
+                name: $scope.$parent.fruit.name,
+                description: $scope.$parent.fruit.description,
+                price: $scope.$parent.fruit.price
+            }, function(response) {
+                    console.log(response);
+                    $scope.$parent.editing = false;
+                    $scope.$parent.update_fruits();
+            }, function(response) {
+                    //error
+                    console.error(response);
+            });
+
+        }else{
+            //Editing fruit -> PUT
+            fruitFactory.update({id: $scope.$parent.fruit._id}, {
+                name: $scope.$parent.fruit.name,
+                description: $scope.$parent.fruit.description,
+                price: $scope.$parent.fruit.price
+            },function(response) {
+                console.log(response);
+                $scope.$parent.editing = false;
+                $scope.$parent.update_fruits();
+            }, function(response) {
+                //error
+                console.error(response);
+            });
+        }
+    };
 }]);
