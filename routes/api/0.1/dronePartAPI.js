@@ -14,15 +14,29 @@ router.post('/newPart', function (req, res){
 
     d.run(function(){
         var specs = ({
+            weight:         req.body.weight,
             height:         req.body.height,
             width:          req.body.width,
             lenght:         req.body.length,
-            weight:         req.body.weight,
+            mountWidth:     req.body.mountWidth,
+            mountLength:    req.body.mountLength,
             voltsMin:       req.body.voltsMin,
             voltsMax:       req.body.voltsMax,
-            amps:           req.body.amps,
-            ampsMax:        req.body.ampsMax,
-            firmware:        req.body.firmware
+            voltMetric:     req.body.voltMetric,
+            ampsConstant:   req.body.ampsConstant,
+            ampsPeak:       req.body.ampsPeak,
+            firmware:       req.body.firmware
+        });
+
+        var feautures = ({
+            supportedFirmware:  req.body.supportedFirmware,
+            supportProtocols:   req.body.supportProtocols,
+            voltageMonitor:     req.body.voltageMonitor,
+            currentMonitor:     req.body.currentMonitor,
+            OSD:                req.body.OSD,
+            BEC:                req.body.BEC,
+            externalBuzzer:     req.body.externalBuzzer,
+            LEDStrip:           req.body.LEDStrip
         });
 
         var images = [];
@@ -44,6 +58,7 @@ router.post('/newPart', function (req, res){
                 company:        req.body.company,
                 datePublished:  req.body.datePublished,
                 specs:          specs,
+                features:       feautures,
                 images:         images,
                 ratings:        ratings
             }, {

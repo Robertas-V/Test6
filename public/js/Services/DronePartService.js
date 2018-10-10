@@ -3,9 +3,6 @@ angular.module('FruitApp.DronePartService', [])
     return $resource(
         '/api/0.1/dronePart/:id', {
             id: '@id'
-        },
-        '/api/0.1/dronePart/:category', {
-            category: '@category'
         }, {
         //     query: {
         //         method: 'GET',
@@ -19,7 +16,44 @@ angular.module('FruitApp.DronePartService', [])
         // }, {
             update: {
                 method: 'PUT'
+            },
+            insert: {
+                method: 'POST',
+                url: '/api/0.1/dronePart/newPart',
+                params: {
+                    name:               '@name',
+                    description:        '@description',
+                    category:           '@category',
+                    brand:              '@brand',
+                    company:            '@company',
+                    datePublished:      '@datePublished',
+
+                    weight:             '@weight',
+                    height:             '@height',
+                    width:              '@width',
+                    lenght:             '@length',
+                    mountWidth:         '@mountWidth',
+                    mountLength:        '@mountLength',
+                    voltsMin:           '@voltsMin',
+                    voltsMax:           '@voltsMax',
+                    voltMetric:         '@voltMetric',
+                    ampsConstant:       '@ampsConstant',
+                    ampsPeak:           '@ampsPeak',
+                    firmware:           '@firmware',
+
+                    supportedFirmware:  '@supportedFirmware',
+                    supportProtocols:   '@supportProtocols',
+                    voltageMonitor:     '@voltageMonitor',
+                    currentMonitor:     '@currentMonitor',
+                    OSD:                '@OSD',
+                    BEC:                '@BEC',
+                    externalBuzzer:     '@externalBuzzer',
+                    LEDStrip:           '@LEDStrip'
+                }
             }
+        },
+        '/api/0.1/dronePart/:category', {
+            category: '@category'
         }
     );
 });

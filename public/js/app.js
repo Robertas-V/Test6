@@ -13,6 +13,7 @@ var app = angular.module('FruitApp', [
     $scope.loading = false;
     $scope.loggedIn = getCookie('username') !== "";
     $scope.fruit={};
+    $scope.newDronePart={category: 'FC'};
     $scope.editing = false;
     $scope.showLogIn = false;
 

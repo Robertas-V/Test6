@@ -17,7 +17,7 @@ block content
                     .mdl-card__supporting-text
                         .text_box
                             label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryFC')
-                                input#partCategoryFC.mdl-radio__button(ng-checked='true', name='category', type='radio', value='FC', ng-model="newDronePart.category")
+                                input#partCategoryFC.mdl-radio__button(name='category', type='radio', value='FC', ng-model="newDronePart.category")
                                 span.mdl-radio__label FC
                             label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryESC')
                                 input#partCategoryESC.mdl-radio__button(name='category', type='radio', value='ESC', ng-model="newDronePart.category")
@@ -53,7 +53,8 @@ block content
                                 input#partDatePublished.mdl-textfield__input(type='text', ng-model="newDronePart.datePublished")
                                 label.mdl-textfield__label(for='partDatePublished') Date published
 
-
+                                
+                        h3.hstyle Specs
                         .text_box
                             .mdl-textfield.mdl-js-textfield
                                 input#partWeight.mdl-textfield__input(type='text', ng-model="newDronePart.specs.weight")
@@ -109,8 +110,7 @@ block content
                                 label.mdl-textfield__label(for='partFirmware') Firmware
                                 
                                 
-                                
-                    
+                        h3.hstyle Features
                         .text_box
                             .mdl-textfield.mdl-js-textfield
                                 input#partSupportedFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.features.supportedFirmware")
@@ -150,6 +150,7 @@ block content
                             .mdl-textfield.mdl-js-textfield
                                 input#partLEDStrip.mdl-textfield__input(type='text', ng-model="newDronePart.features.LEDStrip")
                                 label.mdl-textfield__label(for='partLEDStrip') LED Strip
+                                
                                 
                         button.mdl-button.mdl-js-button.mdl-button--raised
                             | Upload image
