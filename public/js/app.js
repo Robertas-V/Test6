@@ -13,9 +13,14 @@ var app = angular.module('FruitApp', [
     $scope.loading = false;
     $scope.loggedIn = getCookie('username') !== "";
     $scope.fruit={};
-    $scope.newDronePart={category: 'FC'};
     $scope.editing = false;
     $scope.showLogIn = false;
+    $scope.newDronePart = {
+        category: 'FC',
+        specs: {
+            voltMetric: 'V'
+        }
+    };
 
     //Add fruit button handler
     $scope.add_fruit = function(){

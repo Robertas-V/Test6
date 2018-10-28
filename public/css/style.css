@@ -636,6 +636,11 @@ h3.hstyle {
     color: #062724 !important;
 }
 
+.same_line {
+    display: inline;
+    margin-right: 20px;
+}
+
 .mdl-radio__label {
     margin-right: 25px;
 }

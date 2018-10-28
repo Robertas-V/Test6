@@ -29,129 +29,242 @@ block content
                                 input#partCategoryVTX.mdl-radio__button(name='category', type='radio', value='VTX', ng-model="newDronePart.category")
                                 span.mdl-radio__label VTX
                                 
-                        
-                        .text_box.mdl-textfield.mdl-js-textfield
-                            input#partName.mdl-textfield__input(type='text', ng-model="newDronePart.name")
-                            label.mdl-textfield__label(for='partName') Name
+                        .text_box
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                                input#partName.mdl-textfield__input(type='text', ng-model="newDronePart.name")
+                                label.mdl-textfield__label(for='partName') Name
 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
                                 textarea#partDescription.mdl-textfield__input(type='text', rows='3', ng-model="newDronePart.description")
                                 label.mdl-textfield__label(for='partDescription') Description...
                                     
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
                                 input#partBrand.mdl-textfield__input(type='text', ng-model="newDronePart.brand")
                                 label.mdl-textfield__label(for='partBrand') Brand
                         
-                            .mdl-textfield.mdl-js-textfield
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
                                 input#partCompany.mdl-textfield__input(type='text', ng-model="newDronePart.company")
                                 label.mdl-textfield__label(for='partCompany') Company
                         
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partDatePublished.mdl-textfield__input(type='text', ng-model="newDronePart.datePublished")
-                                label.mdl-textfield__label(for='partDatePublished') Date published
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                                input#partDatePublished.mdl-textfield__input(type='text', pattern='^20[0-9]{2}?', ng-model="newDronePart.datePublished")
+                                label.mdl-textfield__label(for='partDatePublished') Release year
+                                span.mdl-textfield__error Enter valid year like 2018!
 
                                 
                         h3.hstyle Specs
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partWeight.mdl-textfield__input(type='text', ng-model="newDronePart.specs.weight")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partWeight.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.weight")
                                 label.mdl-textfield__label(for='partWeight') Weight (g)
+                                span.mdl-textfield__error Input is not a number!
                                 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partHeight.mdl-textfield__input(type='text', ng-model="newDronePart.specs.height")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partHeight.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.height")
                                 label.mdl-textfield__label(for='partHeight') Height (mm)
-                        
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partWidth.mdl-textfield__input(type='text', ng-model="newDronePart.specs.width")
+                                span.mdl-textfield__error Input is not a number!
+                                
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partWidth.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.width")
                                 label.mdl-textfield__label(for='partWidth') Width (mm)
+                                span.mdl-textfield__error Input is not a number!
                         
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partLength.mdl-textfield__input(type='text', ng-model="newDronePart.specs.length")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partLength.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.length")
                                 label.mdl-textfield__label(for='partLength') Length (mm)
+                                span.mdl-textfield__error Input is not a number!
                                 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partMountWidth.mdl-textfield__input(type='text', ng-model="newDronePart.specs.mountWidth")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partMountWidth.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.mountWidth")
                                 label.mdl-textfield__label(for='partMountWidth') Mount Width
+                                span.mdl-textfield__error Input is not a number!
                         
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partMountLength.mdl-textfield__input(type='text', ng-model="newDronePart.specs.mountLength")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partMountLength.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.mountLength")
                                 label.mdl-textfield__label(for='partMountLength') Mount Length
+                                span.mdl-textfield__error Input is not a number!
 
                         .text_box
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partVoltsMin.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltsMin")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partVoltsMin.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.voltsMin")
                                 label.mdl-textfield__label(for='partVoltsMin') Min volts
+                                span.mdl-textfield__error Input is not a number!
                         
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partVoltsMax.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltsMax")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partVoltsMax.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.voltsMax")
                                 label.mdl-textfield__label(for='partVoltsMax') Max volts
+                                span.mdl-textfield__error Input is not a number!
                         
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partVoltsMetric.mdl-textfield__input(type='text', ng-model="newDronePart.specs.voltMetric")
+                            .mdl-textfield.mdl-js-textfield.short_text_field.mdl-textfield--floating-label
                                 label.mdl-textfield__label(for='partVoltsMetric') Volts Metric
+                                select#partVoltsMetric.mdl-textfield__input(ng-model="newDronePart.specs.voltMetric")
+                                    option(value='V') Volts
+                                    option(value='S') Cells
 
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partAmpsConstant.mdl-textfield__input(type='text', ng-model="newDronePart.specs.ampsConstant")
-                                label.mdl-textfield__label(for='partAmpsConstant') Amps (Cons)
+                        .text_box.ng-hide(ng-show="newDronePart.category=='ESC'")
+                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='part4in1ESC')
+                                input#part4in1ESC.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.specs.part4in1ESC")
+                                span.mdl-checkbox__label 4in1
                         
-                            .mdl-textfield.mdl-js-textfield.short_text_field
-                                input#partAmpsPeak.mdl-textfield__input(type='text', ng-model="newDronePart.specs.ampsPeak")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partAmpsConstant.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.ampsConstant")
+                                label.mdl-textfield__label(for='partAmpsConstant') Amps (Cons)
+                                span.mdl-textfield__error Input is not a number!
+                        
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                input#partAmpsPeak.mdl-textfield__input(type='text', pattern='-?[0-9]*(\.[0-9]+)?', ng-model="newDronePart.specs.ampsPeak")
                                 label.mdl-textfield__label(for='partAmpsPeak') Amps (Burst)
+                                span.mdl-textfield__error Input is not a number!
                     
                         .text_box
-                            .mdl-textfield.mdl-js-textfield
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
                                 input#partFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.specs.firmware")
                                 label.mdl-textfield__label(for='partFirmware') Firmware
                                 
                                 
                         h3.hstyle Features
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partSupportedFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.features.supportedFirmware")
-                                label.mdl-textfield__label(for='partSupportedFirmware') Supported Firmwares
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partSupportProtocols.mdl-textfield__input(type='text', ng-model="newDronePart.features.supportProtocols")
-                                label.mdl-textfield__label(for='partSupportProtocols') Supported Protocols
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partVoltageMonitor.mdl-textfield__input(type='text', ng-model="newDronePart.features.voltageMonitor")
-                                label.mdl-textfield__label(for='partVoltageMonitor') Voltage Monitor
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partCurrentMonitor.mdl-textfield__input(type='text', ng-model="newDronePart.features.currentMonitor")
-                                label.mdl-textfield__label(for='partCurrentMonitor') Current Monitor
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partOSD.mdl-textfield__input(type='text', ng-model="newDronePart.features.OSD")
-                                label.mdl-textfield__label(for='partOSD') OSD
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partBEC.mdl-textfield__input(type='text', ng-model="newDronePart.features.BEC")
-                                label.mdl-textfield__label(for='partBEC') BEC
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partExternalBuzzer.mdl-textfield__input(type='text', ng-model="newDronePart.features.externalBuzzer")
-                                label.mdl-textfield__label(for='partExternalBuzzer') Externa Buzzer
-                    
-                        .text_box
-                            .mdl-textfield.mdl-js-textfield
-                                input#partLEDStrip.mdl-textfield__input(type='text', ng-model="newDronePart.features.LEDStrip")
-                                label.mdl-textfield__label(for='partLEDStrip') LED Strip
-                                
-                                
+                        .ng-hide(ng-show="newDronePart.category=='ESC'")  
+                            .text_box
+                                h4.hstyle Supported Firmware
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partBLHeli')
+                                    input#partBLHeli.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.BLHeli")
+                                    span.mdl-checkbox__label BLHeli
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partBLHeli_S')
+                                    input#partBLHeli_S.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.BLHeli_S")
+                                    span.mdl-checkbox__label BLHeli_S
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partBLHeli_32')
+                                    input#partBLHeli_32.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.BLHeli_32")
+                                    span.mdl-checkbox__label BLHeli_32
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partKISS')
+                                    input#partKISS.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.KISS")
+                                    span.mdl-checkbox__label KISS
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partSimonK')
+                                    input#partSimonK.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.SimonK")
+                                    span.mdl-checkbox__label SimonK
+                                    
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                                    input#partOtherESCFirmware.mdl-textfield__input(type='text', ng-model="newDronePart.features.OtherESCFirmware")
+                                    label.mdl-textfield__label(for='partOtherESCFirmware') Other
+                                    
+                        .ng-hide(ng-show="newDronePart.category=='ESC'")  
+                            .text_box
+                                h4.hstyle Supported Protocols
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partPWM')
+                                    input#partPWM.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.PWM")
+                                    span.mdl-checkbox__label PWM
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partOneshot125')
+                                    input#partOneshot125.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Oneshot125")
+                                    span.mdl-checkbox__label Oneshot125
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partOneshot42')
+                                    input#partOneshot42.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Oneshot42")
+                                    span.mdl-checkbox__label Oneshot42
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partMultishot')
+                                    input#partMultishot.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Multishot")
+                                    span.mdl-checkbox__label Multishot
+                                    
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partDshot150')
+                                    input#partDshot150.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Dshot150")
+                                    span.mdl-checkbox__label Dshot150
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partDshot300')
+                                    input#partDshot300.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Dshot300")
+                                    span.mdl-checkbox__label Dshot300
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partDshot600')
+                                    input#partDshot600.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Dshot600")
+                                    span.mdl-checkbox__label Dshot600
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partDshot1200')
+                                    input#partDshot1200.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.Dshot1200")
+                                    span.mdl-checkbox__label Dshot1200
+                                    
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partProShot')
+                                    input#partProShot.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.ProShot")
+                                    span.mdl-checkbox__label ProShot
+
+                        .ng-hide(ng-show="newDronePart.category=='FC'")  
+                            h4.hstyle I/O pins
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                    input#partPinBEC33v.mdl-textfield__input(type='number', min="0", max="10", step="1", ng-model="newDronePart.features.pinBEC33v")
+                                    label.mdl-textfield__label(for='partPinBEC33v') Nº 3.3v pins
+                                    span.mdl-textfield__error Min 0, max 10!
+                                    
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                    input#partPinBEC5v.mdl-textfield__input(type='number', min="0", max="10", step="1", ng-model="newDronePart.features.pinBEC5v")
+                                    label.mdl-textfield__label(for='partPinBEC5v') Nº 5v pins
+                                    span.mdl-textfield__error  Min 0, max 10!
+                                    
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                    input#partPinBEC9v.mdl-textfield__input(type='number', min="0", max="10", step="1", ng-model="newDronePart.features.pinBEC9v")
+                                    label.mdl-textfield__label(for='partPinBEC9v') Nº 9v pins
+                                    span.mdl-textfield__error  Min 0, max 10!
+                                    
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                    input#partPinVBat.mdl-textfield__input(type='number', min="0", max="10", step="1", ng-model="newDronePart.features.pinVBat")
+                                    label.mdl-textfield__label(for='partPinVBat') Nº VBat pins
+                                    span.mdl-textfield__error  Min 0, max 10!
+                                    
+                            .text_box
+                                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.short_text_field
+                                    input#partUARTS.mdl-textfield__input(type='number', min="0", max="10", step="1", ng-model="newDronePart.features.pinUARTS")
+                                    label.mdl-textfield__label(for='partUARTS') Nº UARTS
+                                    span.mdl-textfield__error  Min 0, max 10!
+                                    
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partPinCAM')
+                                    input#partPinCAM.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.pinCAM")
+                                    span.mdl-checkbox__label CAM
+                                    
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.same_line(for='partPinVTX')
+                                    input#partPinVTX.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.pinVTX")
+                                    span.mdl-checkbox__label VTX
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partPinBuzzer')
+                                    input#partPinBuzzer.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.pinBuzzer")
+                                    span.mdl-checkbox__label External Buzzer
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partPinLED')
+                                    input#partPinLED.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.pinLED")
+                                    span.mdl-checkbox__label LED Strip
+                                    
+                            h4.hstyle Other Features
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partVoltageMonitor')
+                                    input#partVoltageMonitor.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.voltageMonitor")
+                                    span.mdl-checkbox__label Voltage sensor
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partCurrentMonitor')
+                                    input#partCurrentMonitor.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.currentMonitor")
+                                    span.mdl-checkbox__label Current sensor
+                            
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partOSD')
+                                    input#partOSD.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.OSD")
+                                    span.mdl-checkbox__label OSD
+                            .text_box
+                                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='partBlackbox')
+                                    input#partBlackbox.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.blackbox")
+                                    span.mdl-checkbox__label Blackbox
+                                    
                         button.mdl-button.mdl-js-button.mdl-button--raised
                             | Upload image
                         

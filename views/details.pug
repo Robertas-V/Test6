@@ -24,51 +24,69 @@ block content
                 .form_box  
                     table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
                         tbody  
-                            tr
+                            tr(ng-if="dronePart.specs.weight")
                                 td.mdl-data-table__cell--non-numeric Weight
-                                td.mdl-data-table__cell--non-numeric
-                                    input.mdl-textfield__input.edit_box(type="text", ng-model="dronePart.specs.weight")
-                            tr
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.weight }} g
+                            tr(ng-if="dronePart.specs.weight && dronePart.specs.width && dronePart.specs.length")
                                 td.mdl-data-table__cell--non-numeric Height X Width X Length
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.height }} mm X {{ dronePart.specs.width }} mm X {{ dronePart.specs.length }} mm
-                            tr
+                                td.mdl-data-table__cell--non-numeric {{ (dronePart.specs.height ? dronePart.specs.height : 'N') }} mm X {{ (dronePart.specs.width ? dronePart.specs.width : 'N') }} mm X {{ (dronePart.specs.length ? dronePart.specs.length : 'N') }} mm
+                            tr(ng-if="dronePart.specs.weight && dronePart.specs.mountLength")
                                 td.mdl-data-table__cell--non-numeric Mounting Width X Length
                                 td.mdl-data-table__cell--non-numeric {{ dronePart.specs.mountWidth }} mm X {{ dronePart.specs.mountLength }} mm
-                            tr
+                            tr(ng-if="dronePart.specs.voltsMin")
                                 td.mdl-data-table__cell--non-numeric Voltage input
                                 td.mdl-data-table__cell--non-numeric {{ dronePart.specs.voltsMin }}-{{ dronePart.specs.voltsMax }} {{ dronePart.specs.voltMetric }}
-                            tr
-                                td.mdl-data-table__cell--non-numeric Current A (Constant / Peak)
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.specs.ampsConstant }} A / {{ dronePart.specs.ampsPeak }} A
-                                
+                            tr(ng-if="dronePart.specs.ampsConstant || dronePart.specs.ampsPeak")
+                                td.mdl-data-table__cell--non-numeric Current
+                                td.mdl-data-table__cell--non-numeric {{ (dronePart.specs.part4in1ESC ? '4 x ' : '') }}{{ (dronePart.specs.ampsConstant ? dronePart.specs.ampsConstant + ' A constant' : '') }} {{ (dronePart.specs.ampsConstant && dronePart.specs.ampsPeak ? '/' : '') }} {{ (dronePart.specs.ampsPeak ? dronePart.specs.ampsPeak + ' A max' : '') }}
+
                 h3.hstyle Features
                 .form_box  
                     table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
                         tbody  
-                            tr
+                            tr(ng-if="dronePart.features.supportedESCFirmware")
                                 td.mdl-data-table__cell--non-numeric Firmware
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportedFirmware }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportedESCFirmware }}
+                                
+                            tr(ng-if="dronePart.features.supportedESCProtocol")
                                 td.mdl-data-table__cell--non-numeric Protocols
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportProtocols }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.supportedESCProtocol }}
+                                
+                            tr(ng-if="dronePart.features.BEC")
                                 td.mdl-data-table__cell--non-numeric BEC
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.BEC }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-BEC')
+                                        input#switch-BEC.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.BEC", disabled)
+                                        
+                            tr(ng-if="dronePart.features.OSD")
                                 td.mdl-data-table__cell--non-numeric OSD
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.OSD }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-OSD')
+                                        input#switch-OSD.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.OSD", disabled)
+                                        
+                            tr(ng-if="dronePart.features.voltageMonitor")
                                 td.mdl-data-table__cell--non-numeric VBat
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.voltageMonitor }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-voltageMonitor')
+                                        input#switch-voltageMonitor.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.voltageMonitor", disabled)
+                            
+                            tr(ng-if="dronePart.features.currentMonitor")
                                 td.mdl-data-table__cell--non-numeric CRT
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.currentMonitor }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-currentMonitor')
+                                        input#switch-currentMonitor.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.currentMonitor", disabled)
+                            
+                            tr(ng-if="dronePart.features.pinBuzzer")
                                 td.mdl-data-table__cell--non-numeric External Buzzer
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.externalBuzzer }}
-                            tr
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-pinBuzzer')
+                                        input#switch-pinBuzzer.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.pinBuzzer", disabled)
+                            
+                            tr(ng-if="dronePart.features.pinLED")
                                 td.mdl-data-table__cell--non-numeric LED Strip
-                                td.mdl-data-table__cell--non-numeric {{ dronePart.features.LEDStrip }}
+                                td.mdl-data-table__cell--non-numeric
+                                    label.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-pinLED')
+                                        input#switch-pinLED.mdl-switch__input(type='checkbox', ng-checked="dronePart.features.pinLED", disabled)
                                 
                                 
                 h3.hstyle Debug

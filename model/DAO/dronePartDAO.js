@@ -15,26 +15,59 @@ var dronePartSpecSchema = new Schema({
   voltsMin:       { type: Number },
   voltsMax:       { type: Number },
   voltMetric:     { type: String },
+  part4in1ESC:    { type: Boolean },
   ampsConstant:   { type: Number },
   ampsPeak:       { type: Number },
   firmware:       { type: String }
 });
 
+var dronePartSupportedESCFirmwareSchema = new Schema({
+    BLHeli:       { type: Boolean },
+    BLHeli_S:     { type: Boolean },
+    BLHeli_32:    { type: Boolean },
+    SimonK:       { type: Boolean },
+    KISS:         { type: Boolean },
+    Other:        { type: String }
+});
+
+var dronePartSupportedESCProtocolSchema = new Schema({
+    PWM:          { type: Boolean },
+    Oneshot125:   { type: Boolean },
+    Oneshot42:    { type: Boolean },
+    Multishot:    { type: Boolean },
+    Dshot150:     { type: Boolean },
+    Dshot300:     { type: Boolean },
+    Dshot600:     { type: Boolean },
+    Dshot1200:    { type: Boolean },
+    ProShot:      { type: Boolean }
+});
+
+var dronePartSupportedFCPinSchema = new Schema({
+    pinBEC33v:    { type: Number },
+    pinBEC5v:     { type: Number },
+    pinBEC9v:     { type: Number },
+    pinVBat:      { type: Number },
+    pinUARTS:     { type: Number },
+    pinCAM:       { type: Boolean },
+    pinVTX:       { type: Boolean },
+    pinBuzzer:    { type: Boolean },
+    pinLED:       { type: Boolean }
+});
+
 var dronePartFeatureSchema = new Schema({
-  supportedFirmware: { type: String },
-  supportProtocols:  { type: String },
-  voltageMonitor:    { type: Boolean },
-  currentMonitor:    { type: Boolean },
-  OSD:               { type: Boolean },
-  BEC:               { type: String },
-  externalBuzzer:    { type: Boolean },
-  LEDStrip:          { type: Boolean }
+  supportedESCFirmware:   dronePartSupportedESCFirmwareSchema,
+  supportedESCProtocol:   dronePartSupportedESCProtocolSchema,
+  supportedFCPinSchema:   dronePartSupportedFCPinSchema,
+  voltageMonitor:         { type: Boolean },
+  currentMonitor:         { type: Boolean },
+  OSD:                    { type: Boolean },
+  blackbox:               { type: Boolean }
 });
 
 var dronePartImageSchema = new Schema({
   title:          { type: String },
   type:           { type: String },
-  path:           { type: String },
+  image:          { data: Buffer, contentType: String },
   dateCreated:    { type: Date, default: Date.now }
 });
 
@@ -125,7 +158,7 @@ function createdronePart(dronePart, callbacks){
     // });
 
 
-        var part = new dronePartModel(dronePart);
+    var part = new dronePartModel(dronePart);
 
     part.save(function (err) {
         if (!err) {
@@ -171,22 +204,24 @@ function readdronePartById(id, callbacks){
 function updatedronePart(id, dronePart, callbacks){
     return dronePartModel.findById(id, function (err, part) {
         if (!err) {
-            part.name           = dronePart.name;
-            part.description    = dronePart.description;
-            part.category       = dronePart.category;
-            part.brand          = dronePart.brand;
-            part.company        = dronePart.company;
-            part.datePublished  = dronePart.datePublished;
+            // TODO: Update part is missing a lot of objects
+            part.name               = dronePart.name;
+            part.description        = dronePart.description;
+            part.category           = dronePart.category;
+            part.brand              = dronePart.brand;
+            part.company            = dronePart.company;
+            part.datePublished      = dronePart.datePublished;
 
-            part.specs.height   = dronePart.specs.height;
-            part.specs.width    = dronePart.specs.width;
-            part.specs.lenght   = dronePart.specs.lenght;
-            part.specs.weight   = dronePart.specs.weight;
-            part.specs.voltsMin = dronePart.specs.voltsMin;
-            part.specs.voltsMax = dronePart.specs.voltsMax;
-            part.specs.amps     = dronePart.specs.amps;
-            part.specs.ampsMax  = dronePart.specs.ampsMax;
-            part.specs.firmware  = dronePart.specs.firmware;
+            part.specs.height       = dronePart.specs.height;
+            part.specs.width        = dronePart.specs.width;
+            part.specs.lenght       = dronePart.specs.lenght;
+            part.specs.weight       = dronePart.specs.weight;
+            part.specs.voltsMin     = dronePart.specs.voltsMin;
+            part.specs.voltsMax     = dronePart.specs.voltsMax;
+            part.specs.part4in1ESC  = dronePart.specs.part4in1ESC;
+            part.specs.ampsConstant = dronePart.specs.ampsConstant;
+            part.specs.ampsMax      = dronePart.specs.ampsMax;
+            part.specs.firmware     = dronePart.specs.firmware;
 
             if (dronePart.images.imageTitle) part.images.imageTitle = dronePart.images.imageTitle;
             if (dronePart.images.type) part.images.type = dronePart.images.type;

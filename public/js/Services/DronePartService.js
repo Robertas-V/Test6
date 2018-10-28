@@ -37,18 +37,42 @@ angular.module('FruitApp.DronePartService', [])
                     voltsMin:           '@voltsMin',
                     voltsMax:           '@voltsMax',
                     voltMetric:         '@voltMetric',
+                    part4in1ESC:        '@part4in1ESC',
                     ampsConstant:       '@ampsConstant',
                     ampsPeak:           '@ampsPeak',
                     firmware:           '@firmware',
 
-                    supportedFirmware:  '@supportedFirmware',
-                    supportProtocols:   '@supportProtocols',
+                    BLHeli:             '@BLHeli',
+                    BLHeli_S:           '@BLHeli_S',
+                    BLHeli_32:          '@BLHeli_32',
+                    KISS:               '@KISS',
+                    SimonK:             '@SimonK',
+                    OtherESCFirmware:   '@OtherESCFirmware',
+
+                    PWM:                '@PWM',
+                    Oneshot125:         '@Oneshot125',
+                    Oneshot42:          '@Oneshot42',
+                    Multishot:          '@Multishot',
+                    Dshot150:           '@Dshot150',
+                    Dshot300:           '@Dshot300',
+                    Dshot600:           '@Dshot600',
+                    Dshot1200:          '@Dshot1200',
+                    ProShot:            '@ProShot',
+
+                    pinBEC33v:          '@pinBEC33v',
+                    pinBEC5v:           '@pinBEC5v',
+                    pinBEC9v:           '@pinBEC9v',
+                    pinVBat:            '@pinVBat',
+                    pinUARTS:           '@pinUARTS',
+                    pinCAM:             '@pinCAM',
+                    pinVTX:             '@pinVTX',
+                    pinBuzzer:          '@pinBuzzer',
+                    pinLED:             '@pinLED',
+
                     voltageMonitor:     '@voltageMonitor',
                     currentMonitor:     '@currentMonitor',
                     OSD:                '@OSD',
-                    BEC:                '@BEC',
-                    externalBuzzer:     '@externalBuzzer',
-                    LEDStrip:           '@LEDStrip'
+                    blackbox:           '@blackbox'
                 }
             }
         },

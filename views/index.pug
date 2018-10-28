@@ -94,7 +94,7 @@ block content
                             td(class="mdl-data-table__cell--non-numeric") {{f.brand}}
                             td(class="mdl-data-table__cell--non-numeric") {{f.name}}
                             td(class="mdl-data-table__cell--non-numeric") {{ f.specs.voltsMin }}-{{ f.specs.voltsMax }} {{ f.specs.voltMetric }}
-                            td(class="mdl-data-table__cell--non-numeric") {{ f.specs.ampsConstant }} A / {{ f.specs.ampsPeak }} A
+                            td(class="mdl-data-table__cell--non-numeric") {{ (f.specs.part4in1ESC ? '4 x ' : '' )}}{{ f.specs.ampsConstant }} A / {{ f.specs.ampsPeak }} A
                             td(class="mdl-data-table__cell--non-numeric") {{f.specs.weight}} g
                             td(class="mdl-data-table__cell--non-numeric") 45$ - 65$
                             td(class="mdl-data-table__cell--non-numeric") {{f.datePublished}}
