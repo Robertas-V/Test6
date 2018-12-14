@@ -31,11 +31,29 @@ i18n.registerAppHelper(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// var multer = require('multer');
+//
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './uploads/')
+//     },
+//     filename: function (req, file, cb) {
+//         console.log("aha " + file.originalname);
+//         cb(null, file.originalname)
+//     }
+// });
+//
+// var upload = multer().single('images');
+//
+// app.use(multer({
+//      storage:storage
+//    }).single('images'));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

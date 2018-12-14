@@ -17,9 +17,16 @@ var app = angular.module('FruitApp', [
     $scope.showLogIn = false;
     $scope.newDronePart = {
         category: 'FC',
+        name: 'test',
+        description: 'test',
+        brand: 'test',
+        company: 'test',
+        datePublished: 2018,
         specs: {
             voltMetric: 'V'
-        }
+        },
+        images: [],
+        images2: []
     };
 
     //Add fruit button handler

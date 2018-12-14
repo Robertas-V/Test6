@@ -80,6 +80,10 @@ angular.module('FruitApp.DronePartTableController', [])
         $scope.$parent.loading = true;
         if($scope.$parent.newDronePart._id === undefined){
             //Adding newDronePart -> POST
+            // console.log($scope.$parent.newDronePart.images);
+            console.log("add_new_part");
+            console.log($scope.$parent.newDronePart.images);
+
             DronePartFactory.insert({
                 name:               $scope.$parent.newDronePart.name,
                 description:        $scope.$parent.newDronePart.description,
@@ -132,9 +136,12 @@ angular.module('FruitApp.DronePartTableController', [])
                 voltageMonitor:     $scope.$parent.newDronePart.features.voltageMonitor,
                 currentMonitor:     $scope.$parent.newDronePart.features.currentMonitor,
                 OSD:                $scope.$parent.newDronePart.features.OSD,
-                blackbox:           $scope.$parent.newDronePart.features.blackbox,
+                blackbox:           $scope.$parent.newDronePart.features.blackbox
+                ,
 
                 images:             $scope.$parent.newDronePart.images
+                // images:             JSON.stringify($scope.$parent.newDronePart.images)
+
 
             }, function(response) {
                     console.log(response);
@@ -162,4 +169,70 @@ angular.module('FruitApp.DronePartTableController', [])
             });
         }
     };
+
+    $scope.imagePreview = [];
+
+    $scope.selectImages = function(f){
+        // TODO: Make it so that if user wants to add another picture, then it will be added to the others, but not more then 5
+        $scope.imagePreview = [];
+        var files = f.files;
+        // $scope.$parent.newDronePart.images = files;
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            //
+            // $scope.$parent.newDronePart.images.push({
+            //    name: file.name,
+            //    type: file.type,
+            //    image: file
+            // });
+
+            // console.log(file);
+            var reader = new FileReader();
+            // reader.onload = $scope.loadSelectedImage;
+            // reader.readAsDataURL(file);
+
+            reader.onload = function(e) {
+                // $scope.$parent.newDronePart.images.push(e.target.result);
+                // $scope.$parent.newDronePart.images.push(JSON.stringify(e.target.result));
+                // console.log(e.target.result);
+                // console.log(JSON.stringify(e.target.result));
+                // $scope.$parent.newDronePart.images.push(e.target.result);
+                // $scope.$parent.newDronePart.images.push(e.target.result);
+                $scope.$parent.newDronePart.images.push(e.target.result.split(",", 2)[1]);
+                // $scope.$parent.newDronePart.images.push(JSON.stringify(e.target.result.split(",", 2)[1]));
+            };
+            // reader.readAsArrayBuffer(file);
+            // reader.readAsBinaryString(file);
+            reader.readAsDataURL(file);
+         }
+         console.log("LOG 4");
+
+         // for (var j = 0; j < $scope.$parent.newDronePart.images2.length; j++) {
+         //     console.log("LOG 1");
+         //     var h = $scope.$parent.newDronePart.images2[j];
+         //     console.log(h);
+         //     $scope.$apply(function () {
+         //         console.log("LOG 2");
+         //         $scope.$parent.newDronePart.images.push({
+         //            name: files[j].name,
+         //            type: files[j].type,
+         //            image: h
+         //         });
+         //     });
+         //  }
+    };
+
+    $scope.loadSelectedImage = function(e){
+        console.log("LOG 3");
+        $scope.$apply(function() {
+            // $scope.$parent.newDronePart.images.push(JSON.stringify(e.target.result));
+            // $scope.$parent.newDronePart.images.push({
+            //     name:   'random-text',
+            //     type:   e.target.result.split(',')[0],
+            //     image:  e.target.result.split(',')[1]
+            // });
+            $scope.imagePreview.push(e.target.result);
+        });
+    }
 }]);

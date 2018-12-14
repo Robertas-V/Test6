@@ -20,7 +20,12 @@ angular.module('FruitApp.DronePartService', [])
             insert: {
                 method: 'POST',
                 url: '/api/0.1/dronePart/newPart',
-                params: {
+                // 'Content-Type': 'multipart/form-data'
+                // headers: { 'Content-Type': undefined },
+                // headers: { 'Content-Type': undefined },
+                // headers: { 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryWfaUCcM8XZucQ4jq', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' },
+                data: {
+                  // model : {
                     name:               '@name',
                     description:        '@description',
                     category:           '@category',
@@ -72,7 +77,13 @@ angular.module('FruitApp.DronePartService', [])
                     voltageMonitor:     '@voltageMonitor',
                     currentMonitor:     '@currentMonitor',
                     OSD:                '@OSD',
-                    blackbox:           '@blackbox'
+                    blackbox:           '@blackbox',
+                  // },
+                  // file: {
+                    // ,
+                    //
+                    images:             '@images'
+                  // }
                 }
             }
         },

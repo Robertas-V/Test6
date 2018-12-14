@@ -14,12 +14,13 @@
     "chai": "3.5.0",
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.9",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "hippie": "^0.4.0",
     "i18next": "~1.10.3",
     "mocha": "2.4.5",
-    "mongoose": "^4.13.14",
-    "morgan": "^1.9.0",
+    "mongoose": "^4.13.17",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
     "serve-favicon": "^2.5.0",
     "supertest": "1.2.0"
   }

@@ -64,10 +64,16 @@ var dronePartFeatureSchema = new Schema({
   blackbox:               { type: Boolean }
 });
 
+// var dronePartImageSchema = new Schema({
+//   name:           { type: String },
+//   type:           { type: String },
+//   image:          { type: Buffer },
+//   dateCreated:    { type: Date, default: Date.now }
+// });
+
+
 var dronePartImageSchema = new Schema({
-  title:          { type: String },
-  type:           { type: String },
-  image:          { data: Buffer, contentType: String },
+  image:          { type: Buffer },
   dateCreated:    { type: Date, default: Date.now }
 });
 
@@ -95,10 +101,10 @@ var dronePartSellerSchema = new Schema({
 
 
 var dronePartSchema = new Schema({
-    name:           { type: String, required: true, unique: true },
-    description:    { type: String, required: true },
-    category:       { type: String, required: true },
-    brand:          { type: String, required: true },
+    name:           { type: String},//, required: true, unique: true },
+    description:    { type: String},//, required: true },
+    category:       { type: String},//, required: true },
+    brand:          { type: String},//, required: true },
     company:        { type: String },
     datePublished:  { type: String },
 

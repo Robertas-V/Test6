@@ -641,6 +641,28 @@ h3.hstyle {
     margin-right: 20px;
 }
 
+.new_product_image_box{
+    padding: 10px 0;
+    display: inline-block;
+}
+
+.thumb {
+    width: 200px;
+    float: left;
+    margin: 5px;
+    border: 1px solid #ccc;
+}
+
+.thumb img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.more_space {
+    margin: 10px;
+}
+
 .mdl-radio__label {
     margin-right: 25px;
 }

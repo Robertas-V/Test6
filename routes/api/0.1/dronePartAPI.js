@@ -1,18 +1,97 @@
 var express = require('express'),
     router = express.Router(),
     domain = require('domain'),
+    fs = require('fs'),
     dronePartDAO = require('./../../../model/DAO/dronePartDAO');
+    // multer  = require('multer');
 
+// var upload = multer({ dest: 'uploads/' });
+
+// var upload = multer({dest: 'uploads/',
+//     onFileUploadStart: function (file) {
+//       console.log(file.originalname + ' is starting ...')
+//     }
+// });
 //CREATE a new dronePart
-router.post('/newPart', function (req, res){
+//router.post('/newPart', upload.any(), function (req, res){
+router.post('/newPart', function (req, res, next) {
+  console.log("We are here");
+  // console.log(req);
+// console.log(Object.keys(req.body.images));
+
+// cia failo info uzkoduota stringify reikia atkoduoti
+// let imagee = req.body.images;//[0];
+// console.info(req);
+// console.info(JSON.parse(req.body.images));
+// let imagee = JSON.parse(req.body.images);
+// console.info(req.body.images[0]);
+// let imagee = req.body.images[0];
+console.info(req.body.images[0]);
+let imagee = req.body.images[0];
+// console.info(JSON.parse(req.body.images[0]));
+// let imagee = JSON.parse(req.body.images[0]);
+// console.info(JSON.parse(imagee));
+// yra so failo duomenis i testas.png
+// var buf = new Buffer(imagee);
+// fs.writeFile('./testas/image.png', buf);
+// fs.writeFile("./testas/testas.png", imagee, 'utf8', function(err) {
+// const base64Data = imagee.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+// console.info(base64Data);
+fs.writeFile("./testas/testas.png", imagee, 'base64', (err) => {
+// fs.writeFile("./testas/testas.png", imagee.toString('utf8'), 'base64', (err) => {
+// fs.writeFile("./testas/testas.png", imagee, 'utf8', (err) => {
+
+
+// fs.writeFile("./testas/testas.png", imagee, function(err) {
+    if(err) {
+        console.info(err);
+        return
+    }
+
+    console.log("The file was saved!");
+});
+
+
+// console.log(JSON.parse(req.body.images)[0]);
+  // var storage = multer.diskStorage({ //multers disk storage settings
+  //     destination: function (req, file, cb) {
+  //         cb(null, '../documents/')
+  //     },
+  //     filename: function (req, file, cb) {
+  //         cb(null, file.originalname)
+  //     }
+  // });
+console.log("We are here 2");
+  // var upload = multer({ //multer settings
+  //     storage: storage
+  // }).single('file');
+
+  upload(req, res, function (err) {
+      if (err) {
+          res.json({error_code: 1, err_desc: err});
+          return;
+      }
+      res.json({error_code: 0, err_desc: null});
+  });
+
+
+//})
+//router.post('/newPart', upload.any(), function (req, res){
     var d = domain.create();
+
+    console.info(req.files);
+    console.log(req.files);
 
     d.on('error', function(error){
         console.log(error.stacktrace);
         res.status(500).send({'error': error.message});
     });
 
+    console.log("Images RV");
+    console.info(req.files);
+
     d.run(function(){
+        console.log("Images RV 2");
         var specs = ({
             weight:               req.body.weight,
             height:               req.body.height,
@@ -72,20 +151,26 @@ router.post('/newPart', function (req, res){
             blackbox:             req.body.blackbox
         });
 
-        var images = [];
         var ratings = [];
 
-        if (req.body.imagePath !== undefined){
-          // TODO: Finish this with multiple images
-            images.add({
-                title:            req.body.imageTitle,
-                type:             req.body.imageType,
-                image: {
-                    data:         req.body.imageData,
-                    contentType:  req.body.imageContentType
-                }
-            });
-        }
+        var images = [];
+        // if (req.body.images){
+        //     for (var i in req.body.images) {
+        //         if (req.body.images.hasOwnProperty(i)) {
+        //             //var f = req.body.images[i].split(',');
+        //             images.add({
+        //                 title:            req.body.images[i].name,
+        //                 type:             req.body.images[i].type,
+        //                 image:            req.body.images[i].image
+        //                 // image: {
+        //                 //     data:         fs.readFileSync(req.body.images[i]),
+        //                 //     contentType:  'image/png'
+        //                 //     // contentType:  req.body.images[i].imageContentType
+        //                 // }
+        //             });
+        //         }
+        //     }
+        //}
 
         dronePartDAO.createdronePart({
                 name:             req.body.name,
@@ -96,7 +181,8 @@ router.post('/newPart', function (req, res){
                 datePublished:    req.body.datePublished,
                 specs:            specs,
                 features:         feautures,
-                images:           images,
+                // images:           images,
+                images:           req.body.images,
                 ratings:          ratings
             }, {
             success: function(f){
@@ -115,7 +201,6 @@ router.get('/', function(req, res, next) {
     var skip = req.query.skip;
     var count = req.query.count;
     var category = req.query.category;
-    console.log(req.query);
 
     d.on('error', function(error){
         console.log(error.stacktrace);

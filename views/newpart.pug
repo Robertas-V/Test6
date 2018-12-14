@@ -13,7 +13,7 @@ block content
             
             h2.hstyle Add new product
             .form_box.mdl-shadow--2dp(ng-controller="DronePartTableController")
-                form(action='#')
+                form(action="#")
                     .mdl-card__supporting-text
                         .text_box
                             label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='partCategoryFC')
@@ -265,9 +265,15 @@ block content
                                     input#partBlackbox.mdl-checkbox__input(type='checkbox', ng-model="newDronePart.features.blackbox")
                                     span.mdl-checkbox__label Blackbox
                                     
-                        button.mdl-button.mdl-js-button.mdl-button--raised
-                            | Upload image
                         
+                        h3.hstyle Images
+                        div.new_product_image_box
+                            .thumb(ng-repeat='image in imagePreview')
+                                img(ng-src='{{image}}')
+                            
+                        .text_box.more_space
+                            input#images(name="images", type='file', accept='image/png, image/jpeg', multiple, onchange="angular.element(this).scope().selectImages(this)")
+                            
+
                     .mdl-card__actions.mdl-card--border
-                        a#save-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.mdl-js-ripple-effect(ng-click="add_new_part()")
-                            | !{t('index.card.save')}
+                        a#save-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.mdl-js-ripple-effect(ng-click="add_new_part()") Save
