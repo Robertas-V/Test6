@@ -14,7 +14,6 @@ describe('UserUnitTest', () => {
     };
 
     before((done) => {
-        this.timeout(10000);
         userDAO.createUser(user1, {
             success(u) {
                 expect(u.username).to.eql('user1@mail.com');
@@ -36,7 +35,7 @@ describe('UserUnitTest', () => {
                 done();
             }
         }
-        this.timeout(10000);
+
         userDAO.deleteUser(user1._id, {
             success() {
                 done1 = true;
@@ -47,7 +46,6 @@ describe('UserUnitTest', () => {
     });
 
     it('#createUser', (done) => {
-        this.timeout(10000);
         userDAO.createUser(user2, {
             success(u) {
                 expect(u.username).to.eql(user2.username);
@@ -62,10 +60,9 @@ describe('UserUnitTest', () => {
                 done(err);
             }
         });
-    });
+    }).timeout(10000);
 
     it('#createDuplicatedUser', (done) => {
-        this.timeout(10000);
         userDAO.createUser(user2, {
             success(u) {
                 expect(u.username).to.eql(user2.username);
@@ -77,10 +74,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#readUserById', (done) => {
-        this.timeout(10000);
         userDAO.readUserById(user1._id, {
             success(u) {
                 expect(u.username).to.eql(user1.username);
@@ -92,10 +88,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#readNonExistingUser', (done) => {
-        this.timeout(10000);
         userDAO.readUserById('-1', {
             success(u) {
                 expect(u.username).to.eql(user1.username);
@@ -107,10 +102,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#updateUser', (done) => {
-        this.timeout(10000);
         user1.username = 'foo';
         userDAO.updateUser(user1._id, user1, {
             success(user) {
@@ -122,10 +116,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#updateNonExistingUser', (done) => {
-        this.timeout(10000);
         user1.username = 'foo';
         userDAO.updateUser('-1', user1, {
             success() {
@@ -137,10 +130,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#loginUser', (done) => {
-        this.timeout(10000);
         userDAO.loginUser(user2, {
             success(u) {
                 expect(u.username).to.eql(user2.username);
@@ -151,10 +143,9 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#deleteUser', (done) => {
-        this.timeout(10000);
         userDAO.deleteUser(user2._id, {
             success(u) {
                 expect(u).to.not.be.null;
@@ -165,5 +156,5 @@ describe('UserUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 });

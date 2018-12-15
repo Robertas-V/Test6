@@ -16,7 +16,6 @@ describe('FruitUnitTest', () => {
     };
 
     before((done) => {
-        this.timeout(10000);
         fruitDAO.createFruit(fruit1, {
             success(f) {
                 expect(f.name).to.eql(fruit1.name);
@@ -33,7 +32,6 @@ describe('FruitUnitTest', () => {
     });
 
     after((done) => {
-        this.timeout(10000);
         fruitDAO.deleteFruit(fruit1._id, {
             success() {
                 done();
@@ -43,7 +41,6 @@ describe('FruitUnitTest', () => {
     });
 
     it('#createFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.createFruit(fruit2, {
             success(f) {
                 expect(f.name).to.eql(fruit2.name);
@@ -57,10 +54,9 @@ describe('FruitUnitTest', () => {
                 done(err);
             }
         });
-    });
+    }).timeout(10000);
 
     it('#createDuplicatedFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.createFruit(fruit2, {
             success(f) {
                 expect(f.name).to.eql(fruit2.name);
@@ -73,10 +69,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#readFruitById', (done) => {
-        this.timeout(10000);
         fruitDAO.readFruitById(fruit1._id, {
             success(f) {
                 expect(f.name).to.eql(fruit1.name);
@@ -89,10 +84,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#readNonExistingFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.readFruitById('-1', {
             success() {
                 expect.fail();
@@ -103,10 +97,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#updateFruit', (done) => {
-        this.timeout(10000);
         fruit1.price = 99;
         fruitDAO.updateFruit(fruit1._id, fruit1, {
             success(f) {
@@ -118,10 +111,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#partialUpdateFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.updateFruit(
             fruit1._id,
             { price: 500 },
@@ -138,10 +130,9 @@ describe('FruitUnitTest', () => {
                 }
             }
         );
-    });
+    }).timeout(10000);
 
     it('#updateNonExistingFruit', (done) => {
-        this.timeout(10000);
         fruit1.price = 99;
         fruitDAO.updateFruit('-1', fruit1, {
             success() {
@@ -153,10 +144,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#deleteFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.deleteFruit(fruit2._id, {
             success() {
                 done();
@@ -166,10 +156,9 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 
     it('#deleteNonExistingFruit', (done) => {
-        this.timeout(10000);
         fruitDAO.deleteFruit('-1', {
             success() {
                 expect.fail();
@@ -180,5 +169,5 @@ describe('FruitUnitTest', () => {
                 done();
             }
         });
-    });
+    }).timeout(10000);
 });

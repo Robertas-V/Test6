@@ -18,7 +18,6 @@ describe('UserService', () => {
     };
 
     before((done) => {
-        this.timeout(10000);
         userDAO.createUser(user2, {
             success(u) {
                 expect(u.username).to.eql('test2@mail.com');
@@ -33,7 +32,6 @@ describe('UserService', () => {
     });
 
     after((done) => {
-        this.timeout(10000);
         userDAO.deleteUser(user1._id, {
             success() {
                 done();
@@ -44,8 +42,6 @@ describe('UserService', () => {
 
     describe('POST /users/', () => {
         it('creates a new user', (done) => {
-            this.timeout(10000);
-
             request
                 .post('/api/0.1/user/')
                 .send(user1)
@@ -55,13 +51,11 @@ describe('UserService', () => {
                     user1._id = res.body.data._id;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('POST /user/', () => {
         it('tries to create a duplicated user', (done) => {
-            this.timeout(10000);
-
             request
                 .post('/api/0.1/user/')
                 .send(user1)
@@ -70,7 +64,7 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
     /*
     describe('POST /users/', function () {
@@ -90,8 +84,6 @@ describe('UserService', () => {
 */
     describe('GET /user/', () => {
         it('returns all users', (done) => {
-            this.timeout(10000);
-
             request
                 .get('/api/0.1/user/')
                 .expect(200)
@@ -99,13 +91,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('GET /user/:id', () => {
         it('returns a user based on the id', (done) => {
-            this.timeout(10000);
-
             request
                 .get(`/api/0.1/user/${user1._id}`)
                 .expect(200)
@@ -113,13 +103,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('GET /users/:id', () => {
         it('tries to read user with non-existing id', (done) => {
-            this.timeout(10000);
-
             request
                 .get('/api/0.1/user/nonvalidid')
                 .expect(404)
@@ -127,12 +115,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /users/:id', () => {
         it('updates user', (done) => {
-            this.timeout(10000);
             user2.username = 'foo';
 
             request
@@ -144,12 +131,11 @@ describe('UserService', () => {
                     expect(res.body.data.username).to.eql('foo');
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /users/:id', () => {
         it('updates user with invalid username', (done) => {
-            this.timeout(10000);
             user2.username = undefined;
 
             request
@@ -160,12 +146,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /users/:id', () => {
         it('updates non-existing user', (done) => {
-            this.timeout(10000);
             user2.username = 'foo';
 
             request
@@ -176,13 +161,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('POST /users/login', () => {
         it('tries to login a user', (done) => {
-            this.timeout(10000);
-
             request
                 .post('/api/0.1/user/login')
                 .send(user1)
@@ -192,13 +175,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('DELETE /users/:id', () => {
         it('deletes user', (done) => {
-            this.timeout(10000);
-
             request
                 .del(`/api/0.1/user/${user2._id}`)
                 .expect(200)
@@ -206,13 +187,11 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('DELETE /users/:id', () => {
         it('deletes non-existing user', (done) => {
-            this.timeout(10000);
-
             request
                 .del('/api/0.1/user/nonvalidid')
                 .expect(500)
@@ -220,6 +199,6 @@ describe('UserService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 });

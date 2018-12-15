@@ -19,7 +19,6 @@ describe('FruitService', () => {
     };
 
     before((done) => {
-        this.timeout(10000);
         fruitDAO.createFruit(fruit2, {
             success(f) {
                 expect(f.name).to.eql(fruit2.name);
@@ -36,7 +35,6 @@ describe('FruitService', () => {
     });
 
     after((done) => {
-        this.timeout(10000);
         fruitDAO.deleteFruit(fruit1._id, {
             success() {
                 done();
@@ -47,8 +45,6 @@ describe('FruitService', () => {
 
     describe('POST /fruit/', () => {
         it('creates a new fruit', (done) => {
-            this.timeout(10000);
-
             request
                 .post('/api/0.1/fruit/')
                 .send(fruit1)
@@ -58,13 +54,11 @@ describe('FruitService', () => {
                     fruit1._id = res.body.data._id;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('POST /fruit/', () => {
         it('tries to create a duplicated fruit', (done) => {
-            this.timeout(10000);
-
             request
                 .post('/api/0.1/fruit/')
                 .send(fruit1)
@@ -73,13 +67,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('GET /fruit/', () => {
         it('returns all fruits', (done) => {
-            this.timeout(10000);
-
             request
                 .get('/api/0.1/fruit')
                 .expect(200)
@@ -87,12 +79,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('GET /fruit/:id', () => {
         it('returns a fruit based on the id', (done) => {
-            this.timeout(10000);
             request
                 .get(`/api/0.1/fruit/${fruit1._id}`)
                 .expect(200)
@@ -100,13 +91,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('GET /fruit/:id', () => {
         it('tries to read a fruit with non-existing id', (done) => {
-            this.timeout(10000);
-
             request
                 .get('/api/0.1/fruit/non-valid-id')
                 .expect(404)
@@ -114,13 +103,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /fruit/:id', () => {
         it('updates fruit', (done) => {
-            this.timeout(10000);
-
             fruit2.price = 300;
 
             request
@@ -132,12 +119,11 @@ describe('FruitService', () => {
                     expect(res.body.data.price).to.eql(300);
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /fruit/:id', () => {
         it('updates fruit with duplicated name', (done) => {
-            this.timeout(10000);
             fruit2.name = fruit1.name;
 
             request
@@ -148,12 +134,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('UPDATE /fruit/:id', () => {
         it('updates non-existing fruit', (done) => {
-            this.timeout(10000);
             fruit2.price = 400;
 
             request
@@ -164,13 +149,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('DELETE /fruit/:id', () => {
         it('deletes fruit', (done) => {
-            this.timeout(10000);
-
             request
                 .del(`/api/0.1/fruit/${fruit2._id}`)
                 .expect(200)
@@ -178,13 +161,11 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 
     describe('DELETE /fruit/:id', () => {
         it('deletes non-existing fruit', (done) => {
-            this.timeout(10000);
-
             request
                 .del('/api/0.1/fruit/non-valid-id')
                 .expect(500)
@@ -192,6 +173,6 @@ describe('FruitService', () => {
                     if (err) throw err;
                     done();
                 });
-        });
+        }).timeout(10000);
     });
 });
