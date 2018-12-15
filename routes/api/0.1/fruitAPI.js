@@ -1,50 +1,56 @@
-var express = require('express'),
-    router = express.Router(),
-    domain = require('domain'),
-    fruitDAO = require('./../../../model/DAO/fruitDAO');
+const express = require('express');
+const router = express.Router();
+const domain = require('domain');
+const fruitDAO = require('./../../../model/DAO/fruitDAO');
 
 //CREATE a new fruit
-router.post('/', function (req, res){
-    var d = domain.create();
+router.post('/', function(req, res) {
+    const d = domain.create();
 
-    d.on('error', function(error){
+    d.on('error', function(error) {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        fruitDAO.createFruit({
+    d.run(function() {
+        fruitDAO.createFruit(
+            {
                 name: req.body.name,
                 description: req.body.description,
                 price: req.body.price
-            }, {
-            success: function(f){
-                res.status(201).send({msg: 'Fruit created succesfully: '+req.body.name, data: f});
             },
-            error: function(err){
-                res.status(500).send(err);
+            {
+                success: function(f) {
+                    res.status(201).send({
+                        msg: 'Fruit created successfully: ' + req.body.name,
+                        data: f
+                    });
+                },
+                error: function(err) {
+                    res.status(500).send(err);
+                }
             }
-        });
+        );
     });
 });
 
 //READ all fruits
-router.get('/', function(req, res, next) {
-    var d = domain.create();
-    var skip = req.query.skip;
-    var count = req.query.count;
+router.get('/', function(req, res) {
+    const d = domain.create();
+    const skip = req.query.skip;
+    const count = req.query.count;
 
-    d.on('error', function(error){
+    d.on('error', function(error) {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
+    d.run(function() {
         fruitDAO.readFruits(skip, count, {
-            success: function(fruits){
+            success: function(fruits) {
                 res.status(200).send(JSON.stringify(fruits));
             },
-            error: function(err){
+            error: function(err) {
                 res.status(500).send(err);
             }
         });
@@ -52,20 +58,19 @@ router.get('/', function(req, res, next) {
 });
 
 //READ fruit by id
-router.get('/:id', function (req, res){
-    var d = domain.create();
-    d.on('error', function(error){
+router.get('/:id', function(req, res) {
+    const d = domain.create();
+    d.on('error', function(error) {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
-
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        fruitDAO.readFruitById(req.params.id ,{
-            success: function(fruit){
+    d.run(function() {
+        fruitDAO.readFruitById(req.params.id, {
+            success: function(fruit) {
                 res.status(200).send(JSON.stringify(fruit));
             },
-            error: function(err){
+            error: function(err) {
                 res.status(404).send(err);
             }
         });
@@ -73,43 +78,53 @@ router.get('/:id', function (req, res){
 });
 
 //UPDATE fruit
-router.put('/:id', function (req, res){
-    var d = domain.create();
-    d.on('error', function(error){
+router.put('/:id', function(req, res) {
+    const d = domain.create();
+    d.on('error', function(error) {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        fruitDAO.updateFruit(req.params.id, {
+    d.run(function() {
+        fruitDAO.updateFruit(
+            req.params.id,
+            {
                 name: req.body.name,
                 description: req.body.description,
                 price: req.body.price
-            }, {
-            success: function(f){
-                res.status(200).send({msg: 'Fruit updated succesfully: '+JSON.stringify(f), data: f});
             },
-            error: function(err){
-                res.status(500).send(err);
+            {
+                success: function(f) {
+                    res.status(200).send({
+                        msg: 'Fruit updated successfully: ' + JSON.stringify(f),
+                        data: f
+                    });
+                },
+                error: function(err) {
+                    res.status(500).send(err);
+                }
             }
-        });
+        );
     });
 });
 
 //DELETE fruit
-router.delete('/:id', function (req, res){
-    var d = domain.create();
-    d.on('error', function(error){
+router.delete('/:id', function(req, res) {
+    const d = domain.create();
+    d.on('error', function(error) {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        fruitDAO.deleteFruit(req.params.id ,{
-            success: function(f){
-                res.status(200).send({msg: 'Fruit deleted succesfully: ' + req.params.id, data: f});
+    d.run(function() {
+        fruitDAO.deleteFruit(req.params.id, {
+            success: function(f) {
+                res.status(200).send({
+                    msg: 'Fruit deleted successfully: ' + req.params.id,
+                    data: f
+                });
             },
-            error: function(err){
+            error: function(err) {
                 res.status(500).send(err);
             }
         });
