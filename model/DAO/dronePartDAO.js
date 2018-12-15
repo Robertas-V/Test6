@@ -1,9 +1,12 @@
-const db = require('../../config/mongodb').init();
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+// TODO: You should remove these rules and fix them
 const mongoose = require('mongoose');
+const db = require('../../config/mongodb').init();
 
 const isInTest = typeof global.it === 'function';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const dronePartSpecSchema = new Schema({
     weight: { type: Number },
@@ -99,10 +102,10 @@ const dronePartSellerSchema = new Schema({
 });
 
 const dronePartSchema = new Schema({
-    name: { type: String }, //, required: true, unique: true },
-    description: { type: String }, //, required: true },
-    category: { type: String }, //, required: true },
-    brand: { type: String }, //, required: true },
+    name: { type: String }, // , required: true, unique: true },
+    description: { type: String }, // , required: true },
+    category: { type: String }, // , required: true },
+    brand: { type: String }, // , required: true },
     company: { type: String },
     datePublished: { type: String },
 
@@ -116,7 +119,7 @@ const dronePartSchema = new Schema({
     dateModified: { type: Date }
 });
 
-dronePartSchema.pre('save', function(next) {
+dronePartSchema.pre('save', (next) => {
     const now = new Date();
     this.dateModified = now;
     // if ( !this.dateCreated ) {
@@ -124,9 +127,9 @@ dronePartSchema.pre('save', function(next) {
     // }
     next();
 });
-const dronePartModel = db.model('droneParts', dronePartSchema);
+const DronePartModel = db.model('droneParts', dronePartSchema);
 
-//CREATE new dronePart
+// CREATE new dronePart
 function createdronePart(dronePart, callbacks) {
     // var specs = new dronePartSpecSchema ({
     //     height:         dronePart.height,
@@ -161,11 +164,11 @@ function createdronePart(dronePart, callbacks) {
     //     images:         dronePart.images
     // });
 
-    const part = new dronePartModel(dronePart);
+    const part = new DronePartModel(dronePart);
 
-    part.save(function(err) {
+    part.save((err) => {
         if (!err) {
-            if (!isInTest) console.log('[ADD]   dronePart created with id: ' + dronePart._id);
+            if (!isInTest) console.log(`[ADD]   dronePart created with id: ${dronePart._id}`);
             callbacks.success(part);
         } else {
             if (!isInTest) console.log(err);
@@ -174,18 +177,17 @@ function createdronePart(dronePart, callbacks) {
     });
 }
 
-//READ all droneParts
+// READ all droneParts
 function readdroneParts(category, skip, count, callbacks) {
-    const filter = category !== undefined ? { category: category } : {};
+    const filter = category !== undefined ? { category } : {};
 
-    return dronePartModel
-        .find(filter)
+    return DronePartModel.find(filter)
         .sort('-dateCreated')
         .skip(skip)
         .limit(count)
-        .exec('find', function(err, droneParts) {
+        .exec('find', (err, droneParts) => {
             if (!err) {
-                if (!isInTest) console.log('[GET]   Get droneParts: ' + droneParts.length);
+                if (!isInTest) console.log(`[GET]   Get droneParts: ${droneParts.length}`);
                 callbacks.success(droneParts);
             } else {
                 if (!isInTest) console.log(err);
@@ -194,11 +196,11 @@ function readdroneParts(category, skip, count, callbacks) {
         });
 }
 
-//READ dronePart by id
+// READ dronePart by id
 function readdronePartById(id, callbacks) {
-    return dronePartModel.findById(id, function(err, dronePart) {
+    return DronePartModel.findById(id, (err, dronePart) => {
         if (!err) {
-            if (!isInTest) console.log('[GET]   Get dronePart: ' + dronePart._id);
+            if (!isInTest) console.log(`[GET]   Get dronePart: ${dronePart._id}`);
             callbacks.success(dronePart);
         } else {
             if (!isInTest) console.log(err);
@@ -207,9 +209,9 @@ function readdronePartById(id, callbacks) {
     });
 }
 
-//UPDATE dronePart
+// UPDATE dronePart
 function updatedronePart(id, dronePart, callbacks) {
-    return dronePartModel.findById(id, function(err, part) {
+    return DronePartModel.findById(id, (err, part) => {
         if (!err) {
             // TODO: Update part is missing a lot of objects
             part.name = dronePart.name;
@@ -234,39 +236,35 @@ function updatedronePart(id, dronePart, callbacks) {
             if (dronePart.images.type) part.images.type = dronePart.images.type;
             if (dronePart.images.path) part.images.path = dronePart.images.path;
 
-            return part.save(function(err) {
-                if (!err) {
-                    if (!isInTest) console.log('[UPD]   Updated dronePart: ' + part._id);
+            return part.save((innerError) => {
+                if (!innerError) {
+                    if (!isInTest) console.log(`[UPD]   Updated dronePart: ${part._id}`);
                     callbacks.success(part);
                 } else {
-                    if (!isInTest) console.log(err);
-                    callbacks.error(err);
+                    if (!isInTest) console.log(innerError);
+                    callbacks.error(innerError);
                 }
             });
-        } else {
-            if (!isInTest) console.log(err);
-            callbacks.error(err);
         }
     });
 }
 
-//DELETE dronePart
+// DELETE dronePart
 function deletedronePart(id, callbacks) {
-    return dronePartModel.findById(id, function(err, part) {
+    return DronePartModel.findById(id, (err, part) => {
         if (!err) {
-            return part.remove(function(err) {
-                if (!err) {
-                    if (!isInTest) console.log('[DEL]    Deleted dronePart: ' + part._id);
+            return part.remove((innerErr) => {
+                if (!innerErr) {
+                    if (!isInTest) console.log(`[DEL]    Deleted dronePart: ${part._id}`);
                     callbacks.success(part);
                 } else {
-                    if (!isInTest) console.log(err);
-                    callbacks.error(err);
+                    if (!isInTest) console.log(innerErr);
+                    callbacks.error(innerErr);
                 }
             });
-        } else {
-            if (!isInTest) console.log(err);
-            callbacks.error(err);
         }
+        if (!isInTest) console.log(err);
+        callbacks.error(err);
     });
 }
 

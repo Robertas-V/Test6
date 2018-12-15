@@ -1,7 +1,9 @@
-const expect = require('chai').expect;
+const chai = require('chai');
 const fruitDAO = require('./../model/DAO/fruitDAO');
 
-describe('FruitUnitTest', function() {
+const { expect } = chai;
+
+describe('FruitUnitTest', () => {
     const fruit1 = {
         name: 'Coconut_test',
         description: 'Brown',
@@ -13,10 +15,10 @@ describe('FruitUnitTest', function() {
         price: 200
     };
 
-    before(function(done) {
+    before((done) => {
         this.timeout(10000);
         fruitDAO.createFruit(fruit1, {
-            success: function(f) {
+            success(f) {
                 expect(f.name).to.eql(fruit1.name);
                 expect(f.description).to.eql(fruit1.description);
                 expect(f.price).to.eql(fruit1.price);
@@ -24,113 +26,113 @@ describe('FruitUnitTest', function() {
                 fruit1._id = f._id;
                 done();
             },
-            error: function(err) {
+            error(err) {
                 done(err);
             }
         });
     });
 
-    after(function(done) {
+    after((done) => {
         this.timeout(10000);
         fruitDAO.deleteFruit(fruit1._id, {
-            success: function() {
+            success() {
                 done();
             },
-            error: function() {}
+            error() {}
         });
     });
 
-    it('#createFruit', function(done) {
+    it('#createFruit', (done) => {
         this.timeout(10000);
         fruitDAO.createFruit(fruit2, {
-            success: function(f) {
+            success(f) {
                 expect(f.name).to.eql(fruit2.name);
                 expect(f.description).to.eql(fruit2.description);
                 expect(f.price).to.eql(fruit2.price);
                 fruit2._id = f._id;
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done(err);
             }
         });
     });
 
-    it('#createDuplicatedFruit', function(done) {
+    it('#createDuplicatedFruit', (done) => {
         this.timeout(10000);
         fruitDAO.createFruit(fruit2, {
-            success: function(f) {
+            success(f) {
                 expect(f.name).to.eql(fruit2.name);
                 expect(f.description).to.eql(fruit2.description);
                 expect(f.price).to.eql(fruit2.price);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#readFruitById', function(done) {
+    it('#readFruitById', (done) => {
         this.timeout(10000);
         fruitDAO.readFruitById(fruit1._id, {
-            success: function(f) {
+            success(f) {
                 expect(f.name).to.eql(fruit1.name);
                 expect(f.description).to.eql(fruit1.description);
                 expect(f.price).to.eql(fruit1.price);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#readNonExistingFruit', function(done) {
+    it('#readNonExistingFruit', (done) => {
         this.timeout(10000);
         fruitDAO.readFruitById('-1', {
-            success: function() {
+            success() {
                 expect.fail();
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#updateFruit', function(done) {
+    it('#updateFruit', (done) => {
         this.timeout(10000);
         fruit1.price = 99;
         fruitDAO.updateFruit(fruit1._id, fruit1, {
-            success: function(f) {
+            success(f) {
                 expect(f.price).to.eql(99);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#partialUpdateFruit', function(done) {
+    it('#partialUpdateFruit', (done) => {
         this.timeout(10000);
         fruitDAO.updateFruit(
             fruit1._id,
             { price: 500 },
             {
-                success: function(f) {
+                success(f) {
                     expect(f.price).to.eql(500);
                     expect(f.name).to.eql(fruit1.name);
                     expect(f.description).to.eql(fruit1.description);
                     done();
                 },
-                error: function(err) {
+                error(err) {
                     expect(err).to.be.null;
                     done();
                 }
@@ -138,42 +140,42 @@ describe('FruitUnitTest', function() {
         );
     });
 
-    it('#updateNonExistingFruit', function(done) {
+    it('#updateNonExistingFruit', (done) => {
         this.timeout(10000);
         fruit1.price = 99;
         fruitDAO.updateFruit('-1', fruit1, {
-            success: function() {
+            success() {
                 expect.fail();
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#deleteFruit', function(done) {
+    it('#deleteFruit', (done) => {
         this.timeout(10000);
         fruitDAO.deleteFruit(fruit2._id, {
-            success: function() {
+            success() {
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#deleteNonExistingFruit', function(done) {
+    it('#deleteNonExistingFruit', (done) => {
         this.timeout(10000);
         fruitDAO.deleteFruit('-1', {
-            success: function() {
+            success() {
                 expect.fail();
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }

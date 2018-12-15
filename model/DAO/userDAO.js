@@ -1,16 +1,19 @@
-const db = require('../../config/mongodb').init(),
-    mongoose = require('mongoose');
+/* eslint-disable no-param-reassign */
+/* eslint-disable consistent-return */
+const mongoose = require('mongoose');
+const db = require('../../config/mongodb').init();
 
 const isInTest = typeof global.it === 'function';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
+
 const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     dateCreated: { type: Date },
     dateModified: { type: Date }
 });
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', (next) => {
     const now = new Date();
     this.dateModified = now;
     if (!this.dateCreated) {
@@ -19,18 +22,18 @@ UserSchema.pre('save', function(next) {
     next();
 });
 
-//Set up schema
+// Set up schema
 const UserModel = db.model('User', UserSchema);
 
-//READ all users
+// READ all users
 function readUsers(skip, count, callbacks) {
     return UserModel.find()
         .sort('-dateCreated')
         .skip(skip)
         .limit(count)
-        .exec('find', function(err, users) {
+        .exec('find', (err, users) => {
             if (!err) {
-                if (!isInTest) console.log('[GET]   Get all users: ' + JSON.stringify(users));
+                if (!isInTest) console.log(`[GET]   Get all users: ${JSON.stringify(users)}`);
                 callbacks.success(users);
             } else {
                 if (!isInTest) console.log(err);
@@ -39,11 +42,11 @@ function readUsers(skip, count, callbacks) {
         });
 }
 
-//READ user by id
+// READ user by id
 function readUserById(id, callbacks) {
-    return UserModel.findById(id, function(err, user) {
+    return UserModel.findById(id, (err, user) => {
         if (!err) {
-            if (!isInTest) console.log('[GET]   Get user: ' + JSON.stringify(user));
+            if (!isInTest) console.log(`[GET]   Get user: ${JSON.stringify(user)}`);
             callbacks.success(user);
         } else {
             if (!isInTest) console.log(err);
@@ -52,16 +55,16 @@ function readUserById(id, callbacks) {
     });
 }
 
-//CREATE user function
+// CREATE user function
 function createUser(user, callbacks) {
     const u = new UserModel({
         username: user.username,
         password: user.password
     });
 
-    u.save(function(err) {
+    u.save((err) => {
         if (!err) {
-            if (!isInTest) console.log('[ADD]   User created with username: ' + user.username);
+            if (!isInTest) console.log(`[ADD]   User created with username: ${user.username}`);
             callbacks.success(u);
         } else {
             if (!isInTest) console.log(err);
@@ -70,59 +73,58 @@ function createUser(user, callbacks) {
     });
 }
 
-//createUser( {username: "Robertas", password: "pass"} );
+// createUser( {username: "Robertas", password: "pass"} );
 
-//UPDATE user
+// UPDATE user
 function updateUser(id, user, callbacks) {
-    return UserModel.findById(id, function(err, u) {
+    return UserModel.findById(id, (err, u) => {
         if (!err) {
             u.username = user.username;
             u.password = user.password;
-            return u.save(function(err) {
-                if (!err) {
-                    if (!isInTest) console.log('[UDP]   Updated user: ' + JSON.stringify(u));
+            return u.save((innerErr) => {
+                if (!innerErr) {
+                    if (!isInTest) console.log(`[UDP]   Updated user: ${JSON.stringify(u)}`);
                     callbacks.success(u);
                 } else {
-                    if (!isInTest) console.log(err);
-                    callbacks.error(err);
+                    if (!isInTest) console.log(innerErr);
+                    callbacks.error(innerErr);
                 }
             });
-        } else {
-            if (!isInTest) console.log(err);
-            callbacks.error(err);
         }
+        if (!isInTest) console.log(err);
+        callbacks.error(err);
     });
 }
 
-//DELETE user
+// DELETE user
 function deleteUser(id, callbacks) {
-    return UserModel.findById(id, function(err, user) {
-        return user.remove(function(err) {
+    return UserModel.findById(id, (_, user) =>
+        user.remove((err) => {
             if (!err) {
-                if (!isInTest) console.log('[DEL]    Deleted user: ' + id);
+                if (!isInTest) console.log(`[DEL]    Deleted user: ${id}`);
                 callbacks.success(user);
             } else {
                 if (!isInTest) console.log(err);
                 callbacks.error(err);
             }
-        });
-    });
+        })
+    );
 }
 
-//Login user
+// Login user
 function loginUser(user, callbacks) {
-    return UserModel.find({ username: user.username }, function(err, u) {
+    return UserModel.find({ username: user.username }, (err, u) => {
         if (!err) {
             if (u[0]) {
-                if (u[0].password == user.password) {
-                    //Login ok
+                if (u[0].password === user.password) {
+                    // Login ok
                     callbacks.success(u[0]);
                 } else {
-                    //Password mismatch
+                    // Password mismatch
                     callbacks.error({ msg: 'Invalid login parameters', data: user });
                 }
             } else {
-                //User does not exist
+                // User does not exist
                 callbacks.error({ msg: 'Invalid login parameters', data: user });
             }
         } else {

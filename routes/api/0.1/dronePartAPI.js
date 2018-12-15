@@ -1,24 +1,25 @@
+const uuid = require('uuid/v4');
 const express = require('express');
 const domain = require('domain');
 const multer = require('multer');
 const fs = require('fs');
 const dronePartDAO = require('./../../../model/DAO/dronePartDAO');
+
 const router = express.Router();
-const uuid = require('uuid/v4');
 
 const upload = multer({ dest: 'uploads/' });
 
-router.post('/newPart', upload.array(), function(req, res) {
+router.post('/newPart', upload.array(), (req, res) => {
     const base64Data = req.body.images[0];
     console.log('writing file...', base64Data);
 
     const imagePath = `/Temp/Upload/${uuid()}.png`;
 
-    fs.writeFile(imagePath, base64Data, 'base64', function(err) {
+    fs.writeFile(imagePath, base64Data, 'base64', (err) => {
         if (err) console.log(err);
 
-        fs.readFile(imagePath, function(err, data) {
-            if (err) throw err;
+        fs.readFile(imagePath, (innerErr, data) => {
+            if (innerErr) throw innerErr;
             console.log('reading file...', data.toString('base64'));
             res.send(data);
         });
@@ -29,8 +30,8 @@ router.post('/newPart', upload.array(), function(req, res) {
 //       console.log(file.originalname + ' is starting ...')
 //     }
 // });
-//CREATE a new dronePart
-//router.post('/newPart', upload.any(), function (req, res){
+// CREATE a new dronePart
+// router.post('/newPart', upload.any(), function (req, res){
 // router.post('/newPart', function(req, res) {
 //     console.log('We are here');
 //     // console.log(req);
@@ -215,79 +216,77 @@ router.post('/newPart', upload.array(), function(req, res) {
 //     });
 // });
 
-//READ all droneParts
-router.get('/', function(req, res) {
+// READ all droneParts
+router.get('/', (req, res) => {
     const d = domain.create();
-    const skip = req.query.skip;
-    const count = req.query.count;
-    const category = req.query.category;
+    const { skip, count, category } = req.query;
 
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         dronePartDAO.readdroneParts(category, skip, count, {
-            success: function(droneParts) {
+            success(droneParts) {
                 res.status(200).send(JSON.stringify(droneParts));
             },
-            error: function(err) {
+            error(err) {
                 res.status(500).send(err);
             }
         });
     });
 });
 
-//READ dronePart by id
-router.get('/:id', function(req, res) {
+// READ dronePart by id
+router.get('/:id', (req, res) => {
     const d = domain.create();
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         dronePartDAO.readdronePartById(req.params.id, {
-            success: function(dronePart) {
+            success(dronePart) {
                 res.status(200).send(JSON.stringify(dronePart));
             },
-            error: function(err) {
+            error(err) {
                 res.status(404).send(err);
             }
         });
     });
 });
 
-//READ dronePart by category
-router.get('/:category', function(req, res) {
+// READ dronePart by category
+router.get('/:category', (req, res) => {
     const d = domain.create();
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         dronePartDAO.readdroneParts(req.params.category, req.params.skip, req.params.count, {
-            success: function(droneParts) {
+            success(droneParts) {
                 res.status(200).send(JSON.stringify(droneParts));
             },
-            error: function(err) {
+            error(err) {
                 res.status(500).send(err);
             }
         });
     });
 });
 
-//UPDATE dronePart
-router.put('/:id', function(req, res) {
+// UPDATE dronePart
+router.put('/:id', (req, res) => {
     const d = domain.create();
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         const specs = {
             // TODO: Update part is missing a lot of objects
             height: req.body.height,
@@ -320,13 +319,13 @@ router.put('/:id', function(req, res) {
                 images: { images }
             },
             {
-                success: function(f) {
+                success(f) {
                     res.status(200).send({
-                        msg: 'dronePart updated successfully: ' + JSON.stringify(f),
+                        msg: `dronePart updated successfully: ${JSON.stringify(f)}`,
                         data: f
                     });
                 },
-                error: function(err) {
+                error(err) {
                     res.status(500).send(err);
                 }
             }
@@ -334,23 +333,23 @@ router.put('/:id', function(req, res) {
     });
 });
 
-//DELETE dronePart
-router.delete('/:id', function(req, res) {
+// DELETE dronePart
+router.delete('/:id', (req, res) => {
     const d = domain.create();
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         dronePartDAO.deletedronePart(req.params.id, {
-            success: function(f) {
+            success(f) {
                 res.status(200).send({
-                    msg: 'dronePart deleted successfully: ' + req.params.id,
+                    msg: `dronePart deleted successfully: ${req.params.id}`,
                     data: f
                 });
             },
-            error: function(err) {
+            error(err) {
                 res.status(500).send(err);
             }
         });

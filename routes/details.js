@@ -1,30 +1,31 @@
 const express = require('express');
+
 const router = express.Router();
 const domain = require('domain');
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
     const d = domain.create();
 
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
+    d.run(() => {
         res.render('newPart', { detailsType: 'New', title: 'Details' });
     });
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:id', (req, res) => {
     const d = domain.create();
 
-    d.on('error', function(error) {
+    d.on('error', (error) => {
         console.log(error.stacktrace);
         res.status(500).send({ error: error.message });
     });
 
-    d.run(function() {
-        res.render('details', { id: req.params['id'], title: 'Details' });
+    d.run(() => {
+        res.render('details', { id: req.params.id, title: 'Details' });
     });
 });
 

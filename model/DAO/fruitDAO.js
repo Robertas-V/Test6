@@ -1,9 +1,11 @@
-const db = require('../../config/mongodb').init(),
-    mongoose = require('mongoose');
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+const mongoose = require('mongoose');
+const db = require('../../config/mongodb').init();
 
 const isInTest = typeof global.it === 'function';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const FruitSchema = new Schema({
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
@@ -11,7 +13,7 @@ const FruitSchema = new Schema({
     dateCreated: { type: Date },
     dateModified: { type: Date }
 });
-FruitSchema.pre('save', function(next) {
+FruitSchema.pre('save', (next) => {
     const now = new Date();
     this.dateModified = now;
     if (!this.dateCreated) {
@@ -21,7 +23,7 @@ FruitSchema.pre('save', function(next) {
 });
 const FruitModel = db.model('Fruit', FruitSchema);
 
-//CREATE new fruit
+// CREATE new fruit
 function createFruit(fruit, callbacks) {
     const f = new FruitModel({
         name: fruit.name,
@@ -29,9 +31,9 @@ function createFruit(fruit, callbacks) {
         price: fruit.price
     });
 
-    f.save(function(err) {
+    f.save((err) => {
         if (!err) {
-            if (!isInTest) console.log('[ADD]   Fruit created with id: ' + f._id);
+            if (!isInTest) console.log(`[ADD]   Fruit created with id: ${f._id}`);
             callbacks.success(f);
         } else {
             if (!isInTest) console.log(err);
@@ -40,15 +42,15 @@ function createFruit(fruit, callbacks) {
     });
 }
 
-//READ all fruits
+// READ all fruits
 function readFruits(skip, count, callbacks) {
     return FruitModel.find()
         .sort('-dateCreated')
         .skip(skip)
         .limit(count)
-        .exec('find', function(err, fruits) {
+        .exec('find', (err, fruits) => {
             if (!err) {
-                if (!isInTest) console.log('[GET]   Get fruits: ' + fruits.length);
+                if (!isInTest) console.log(`[GET]   Get fruits: ${fruits.length}`);
                 callbacks.success(fruits);
             } else {
                 if (!isInTest) console.log(err);
@@ -57,11 +59,11 @@ function readFruits(skip, count, callbacks) {
         });
 }
 
-//READ fruit by id
+// READ fruit by id
 function readFruitById(id, callbacks) {
-    return FruitModel.findById(id, function(err, fruit) {
+    return FruitModel.findById(id, (err, fruit) => {
         if (!err) {
-            if (!isInTest) console.log('[GET]   Get fruit: ' + fruit._id);
+            if (!isInTest) console.log(`[GET]   Get fruit: ${fruit._id}`);
             callbacks.success(fruit);
         } else {
             if (!isInTest) console.log(err);
@@ -70,47 +72,45 @@ function readFruitById(id, callbacks) {
     });
 }
 
-//UPDATE fruit
+// UPDATE fruit
 function updateFruit(id, fruit, callbacks) {
-    return FruitModel.findById(id, function(err, f) {
+    return FruitModel.findById(id, (err, f) => {
         if (!err) {
             if (fruit.name) f.name = fruit.name;
             if (fruit.description) f.description = fruit.description;
             if (fruit.price) f.price = fruit.price;
 
-            return f.save(function(err) {
-                if (!err) {
-                    if (!isInTest) console.log('[UDP]   Updated fruit: ' + f._id);
+            return f.save((innerError) => {
+                if (!innerError) {
+                    if (!isInTest) console.log(`[UDP]   Updated fruit: ${f._id}`);
                     callbacks.success(f);
                 } else {
-                    if (!isInTest) console.log(err);
-                    callbacks.error(err);
+                    if (!isInTest) console.log(innerError);
+                    callbacks.error(innerError);
                 }
             });
-        } else {
-            if (!isInTest) console.log(err);
-            callbacks.error(err);
         }
+        if (!isInTest) console.log(err);
+        callbacks.error(err);
     });
 }
 
-//DELETE fruit
+// DELETE fruit
 function deleteFruit(id, callbacks) {
-    return FruitModel.findById(id, function(err, f) {
+    return FruitModel.findById(id, (err, f) => {
         if (!err) {
-            return f.remove(function(err) {
-                if (!err) {
-                    if (!isInTest) console.log('[DEL]    Deleted fruit: ' + f._id);
+            return f.remove((innerErr) => {
+                if (!innerErr) {
+                    if (!isInTest) console.log(`[DEL]    Deleted fruit: ${f._id}`);
                     callbacks.success(f);
                 } else {
-                    if (!isInTest) console.log(err);
-                    callbacks.error(err);
+                    if (!isInTest) console.log(innerErr);
+                    callbacks.error(innerErr);
                 }
             });
-        } else {
-            if (!isInTest) console.log(err);
-            callbacks.error(err);
         }
+        if (!isInTest) console.log(err);
+        callbacks.error(err);
     });
 }
 

@@ -13,7 +13,7 @@ const dronePartAPI = require('./routes/api/0.1/dronePartAPI');
 
 const app = express();
 
-//i18n init
+// i18n init
 i18n.init({ lng: 'en-US' });
 i18n.setLng('en-US');
 
@@ -43,7 +43,7 @@ app.set('view engine', 'pug');
 //    }).single('images'));
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -51,26 +51,27 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./routes'));
+
 app.use('/api/0.1/user', userAPI);
 app.use('/api/0.1/fruit', fruitAPI);
 app.use('/api/0.1/dronePart', dronePartAPI);
 
 // error handlers
-app.use(function(error, req, res) {
+app.use((error, req, res) => {
     if (domain.active) {
         res.render('error', {
             message: 'domain.active',
-            error: error
+            error
         });
         domain.active.emit('error', error);
     } else {
         // development error handler
         // will print stacktrace
 
-        app.use(function(err, req, res) {
+        app.use((err, _, innerReq) => {
             console.info('Error handler 3');
-            res.status(err.status || 500);
-            res.render('error', {
+            innerReq.status(err.status || 500);
+            innerReq.render('error', {
                 message: err.message,
                 error: app.get('env') === 'development' ? err : {}
             });
@@ -78,9 +79,9 @@ app.use(function(error, req, res) {
     }
 });
 
-//DEFAULT ERROR HANDLER
+// DEFAULT ERROR HANDLER
 // catch 404 and forward to error handler
-app.use(function(req, res) {
+app.use((req, res) => {
     res.render('error', {
         message: 'Oops!',
         error: { status: 'Page not found!' }

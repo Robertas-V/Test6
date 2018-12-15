@@ -1,7 +1,9 @@
-const expect = require('chai').expect;
+const chai = require('chai');
 const userDAO = require('./../model/DAO/userDAO');
 
-describe('UserUnitTest', function() {
+const { expect } = chai;
+
+describe('UserUnitTest', () => {
     const user1 = {
         username: 'user1@mail.com',
         password: 'pass1'
@@ -11,22 +13,22 @@ describe('UserUnitTest', function() {
         password: 'pass2'
     };
 
-    before(function(done) {
+    before((done) => {
         this.timeout(10000);
         userDAO.createUser(user1, {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql('user1@mail.com');
                 expect(u.password).to.eql('pass1');
                 user1._id = u._id;
                 done();
             },
-            error: function(err) {
+            error(err) {
                 done(err);
             }
         });
     });
 
-    after(function(done) {
+    after((done) => {
         let done1 = false;
         const done2 = true;
         function finish() {
@@ -36,129 +38,129 @@ describe('UserUnitTest', function() {
         }
         this.timeout(10000);
         userDAO.deleteUser(user1._id, {
-            success: function() {
+            success() {
                 done1 = true;
                 finish();
             },
-            error: function() {}
+            error() {}
         });
     });
 
-    it('#createUser', function(done) {
+    it('#createUser', (done) => {
         this.timeout(10000);
         userDAO.createUser(user2, {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql(user2.username);
                 expect(u.password).to.eql(user2.password);
                 user2._id = u._id;
                 done();
             },
-            error: function(err) {
-                //console.error(err);
-                //expect().fail;
+            error(err) {
+                // console.error(err);
+                // expect().fail;
                 expect(err).to.be.null;
                 done(err);
             }
         });
     });
 
-    it('#createDuplicatedUser', function(done) {
+    it('#createDuplicatedUser', (done) => {
         this.timeout(10000);
         userDAO.createUser(user2, {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql(user2.username);
                 expect(u.password).to.eql(user2.password);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#readUserById', function(done) {
+    it('#readUserById', (done) => {
         this.timeout(10000);
         userDAO.readUserById(user1._id, {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql(user1.username);
                 expect(u.password).to.eql(user1.password);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#readNonExistingUser', function(done) {
+    it('#readNonExistingUser', (done) => {
         this.timeout(10000);
         userDAO.readUserById('-1', {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql(user1.username);
                 expect(u.password).to.eql(user1.password);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#updateUser', function(done) {
+    it('#updateUser', (done) => {
         this.timeout(10000);
         user1.username = 'foo';
         userDAO.updateUser(user1._id, user1, {
-            success: function(user) {
+            success(user) {
                 expect(user.username).to.eql('foo');
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#updateNonExistingUser', function(done) {
+    it('#updateNonExistingUser', (done) => {
         this.timeout(10000);
         user1.username = 'foo';
         userDAO.updateUser('-1', user1, {
-            success: function() {
+            success() {
                 expect.fail();
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.not.be.null;
                 done();
             }
         });
     });
 
-    it('#loginUser', function(done) {
+    it('#loginUser', (done) => {
         this.timeout(10000);
         userDAO.loginUser(user2, {
-            success: function(u) {
+            success(u) {
                 expect(u.username).to.eql(user2.username);
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }
         });
     });
 
-    it('#deleteUser', function(done) {
+    it('#deleteUser', (done) => {
         this.timeout(10000);
         userDAO.deleteUser(user2._id, {
-            success: function(u) {
+            success(u) {
                 expect(u).to.not.be.null;
                 done();
             },
-            error: function(err) {
+            error(err) {
                 expect(err).to.be.null;
                 done();
             }

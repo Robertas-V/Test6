@@ -1,5 +1,6 @@
 {
-    "extends": ["eslint:recommended", "plugin:node/recommended"],
+    "extends": ["airbnb-base", "plugin:node/recommended", "prettier"],
+    "plugins": ["chai-friendly", "prettier"],
     "rules": {
         "node/exports-style": ["error", "module.exports"],
         "node/prefer-global/buffer": ["error", "always"],
@@ -8,15 +9,14 @@
         "node/prefer-global/url-search-params": ["error", "always"],
         "node/prefer-global/url": ["error", "always"],
         "node/no-deprecated-api": "warn",
-        "prefer-const": [
-            "error",
-            {
-                "destructuring": "any",
-                "ignoreReadBeforeAssign": false
-            }
-        ],
-        "no-console": "off",
-        "no-var": "error"
+        "prettier/prettier": ["error"],
+        "indent": "off",
+        "linebreak-style": "off",
+        "space-before-function-paren": "off",
+        "comma-dangle": "off",
+        "no-underscore-dangle": "off",
+        "no-unused-expressions": "off",
+        "chai-friendly/no-unused-expressions": "error"
     },
     "env": {
         "node": true,
