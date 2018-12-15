@@ -7,9 +7,7 @@ const mongoose = require('mongoose');
 // mongodb://han_solo:chewbacca@ds011419.mlab.com:11419/mean-boilerplate-test
 
 function init() {
-    return mongoose.createConnection(
-        'mongodb://evaldas:ujthUZDCr6BwkaXQ@development-shard-00-00-ogafb.gcp.mongodb.net:27017,development-shard-00-01-ogafb.gcp.mongodb.net:27017,development-shard-00-02-ogafb.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Development-shard-0&authSource=admin&retryWrites=true'
-    );
+    return mongoose.createConnection('mongodb://localhost:27017/mean-boilerplate');
 }
 
 module.exports.init = init;
