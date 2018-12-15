@@ -1,11 +1,11 @@
-const express = require('express'),
-    router = express.Router(),
-    domain = require('domain');
+const express = require('express');
+const router = express.Router();
+const domain = require('domain');
 
 router.use('/details', require('./details'));
 
 // GET index
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     const d = domain.create();
 
     d.on('error', function(error) {
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/parts', function(req, res, next) {
+router.get('/parts', function(req, res) {
     const d = domain.create();
 
     d.on('error', function(error) {
@@ -31,7 +31,7 @@ router.get('/parts', function(req, res, next) {
     });
 });
 
-router.get('/newpart', function(req, res, next) {
+router.get('/newpart', function(req, res) {
     const d = domain.create();
 
     d.on('error', function(error) {

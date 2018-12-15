@@ -1,7 +1,7 @@
-const express = require('express'),
-    router = express.Router(),
-    domain = require('domain'),
-    userDAO = require('./../../../model/DAO/userDAO');
+const express = require('express');
+const router = express.Router();
+const domain = require('domain');
+const userDAO = require('./../../../model/DAO/userDAO');
 
 const isInTest = typeof global.it === 'function';
 
@@ -37,7 +37,7 @@ router.post('/', function(req, res) {
 });
 
 //READ all Users
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     const d = domain.create();
     const skip = req.query.skip;
     const count = req.query.count;

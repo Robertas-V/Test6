@@ -1,7 +1,5 @@
-const expect = require('chai').expect,
-    mongoose = require('mongoose'),
-    db = require('./../config/mongodb').init(),
-    fruitDAO = require('./../model/DAO/fruitDAO');
+const expect = require('chai').expect;
+const fruitDAO = require('./../model/DAO/fruitDAO');
 
 describe('FruitUnitTest', function() {
     const fruit1 = {
@@ -38,7 +36,7 @@ describe('FruitUnitTest', function() {
             success: function() {
                 done();
             },
-            error: function(err) {}
+            error: function() {}
         });
     });
 
@@ -94,7 +92,7 @@ describe('FruitUnitTest', function() {
     it('#readNonExistingFruit', function(done) {
         this.timeout(10000);
         fruitDAO.readFruitById('-1', {
-            success: function(f) {
+            success: function() {
                 expect.fail();
                 done();
             },
@@ -144,7 +142,7 @@ describe('FruitUnitTest', function() {
         this.timeout(10000);
         fruit1.price = 99;
         fruitDAO.updateFruit('-1', fruit1, {
-            success: function(f) {
+            success: function() {
                 expect.fail();
                 done();
             },

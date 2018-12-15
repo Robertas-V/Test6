@@ -1,8 +1,8 @@
-const express = require('express'),
-    router = express.Router(),
-    domain = require('domain');
+const express = require('express');
+const router = express.Router();
+const domain = require('domain');
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     const d = domain.create();
 
     d.on('error', function(error) {
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res) {
     const d = domain.create();
 
     d.on('error', function(error) {

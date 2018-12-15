@@ -1,4 +1,3 @@
-const hippie = require('hippie');
 const expect = require('chai').expect;
 const userDAO = require('./../model/DAO/userDAO');
 
@@ -37,7 +36,7 @@ describe('UserService', function() {
             success: function() {
                 done();
             },
-            error: function(err) {}
+            error: function() {}
         });
     });
 
@@ -65,7 +64,7 @@ describe('UserService', function() {
                 .post('/api/0.1/user/')
                 .send(user1)
                 .expect(500)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -94,7 +93,7 @@ describe('UserService', function() {
             request
                 .get('/api/0.1/user/')
                 .expect(200)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -108,7 +107,7 @@ describe('UserService', function() {
             request
                 .get('/api/0.1/user/' + user1._id)
                 .expect(200)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -122,7 +121,7 @@ describe('UserService', function() {
             request
                 .get('/api/0.1/user/nonvalidid')
                 .expect(404)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -155,7 +154,7 @@ describe('UserService', function() {
                 .put('/api/0.1/user/' + user2._id)
                 .send(user2)
                 .expect(500)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -171,7 +170,7 @@ describe('UserService', function() {
                 .put('/api/0.1/user/nonvalidid')
                 .send(user2)
                 .expect(500)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -201,7 +200,7 @@ describe('UserService', function() {
             request
                 .del('/api/0.1/user/' + user2._id)
                 .expect(200)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
@@ -215,7 +214,7 @@ describe('UserService', function() {
             request
                 .del('/api/0.1/user/nonvalidid')
                 .expect(500)
-                .end(function(err, res) {
+                .end(function(err) {
                     if (err) throw err;
                     done();
                 });
