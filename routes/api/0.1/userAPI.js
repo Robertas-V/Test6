@@ -1,148 +1,165 @@
-var express = require('express'),
-    router = express.Router(),
-    domain = require('domain'),
-    userDAO = require('./../../../model/DAO/userDAO');
+const express = require('express');
 
-var isInTest = typeof global.it === 'function';
+const router = express.Router();
+const domain = require('domain');
+const userDAO = require('./../../../model/DAO/userDAO');
 
-//CREATE a new user
-router.post('/', function (req, res){
-    var d = domain.create();
+const isInTest = typeof global.it === 'function';
 
-    d.on('error', function(error){
-        if(!isInTest)  console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+// CREATE a new user
+router.post('/', (req, res) => {
+    const d = domain.create();
+
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        userDAO.createUser({
-                username:   req.body.username,
-                password:   req.body.password,
-                phone:      req.body.phone
-            }, {
-            success: function(user){
-                res.status(201).send({msg: 'User created succesfully: '+JSON.stringify(user), data: user});
+    d.run(() => {
+        userDAO.createUser(
+            {
+                username: req.body.username,
+                password: req.body.password,
+                phone: req.body.phone
             },
-            error: function(err){
-                res.status(500).send(err);
+            {
+                success(user) {
+                    res.status(201).send({
+                        msg: `User created successfully: ${JSON.stringify(user)}`,
+                        data: user
+                    });
+                },
+                error(err) {
+                    res.status(500).send(err);
+                }
             }
-        });
+        );
     });
 });
 
-//READ all Users
-router.get('/', function(req, res, next) {
-    var d = domain.create();
-    var skip = req.query.skip;
-    var count = req.query.count;
+// READ all Users
+router.get('/', (req, res) => {
+    const d = domain.create();
+    const { skip, count } = req.query;
 
-    d.on('error', function(error){
-        if(!isInTest) console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
+    d.run(() => {
         userDAO.readUsers(skip, count, {
-            success: function(Users){
+            success(Users) {
                 res.status(200).send(JSON.stringify(Users));
             },
-            error: function(err){
+            error(err) {
                 res.status(500).send(err);
             }
         });
     });
 });
 
-//READ User by id
-router.get('/:id', function (req, res){
-    var d = domain.create();
+// READ User by id
+router.get('/:id', (req, res) => {
+    const d = domain.create();
 
-    d.on('error', function(error){
-        if(!isInTest) console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
-
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        userDAO.readUserById(req.params.id ,{
-            success: function(User){
+    d.run(() => {
+        userDAO.readUserById(req.params.id, {
+            success(User) {
                 res.status(200).send(JSON.stringify(User));
             },
-            error: function(err){
+            error(err) {
                 res.status(404).send(err);
             }
         });
     });
 });
 
-//UPDATE User
-router.put('/:id', function (req, res){
-    var d = domain.create();
+// UPDATE User
+router.put('/:id', (req, res) => {
+    const d = domain.create();
 
-    d.on('error', function(error){
-        if(!isInTest) console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        userDAO.updateUser(req.params.id, {
-                username:      req.body.username,
-                password:   req.body.password
-            }, {
-            success: function(user){
-                res.status(200).send({msg:'User updated succesfully: '+JSON.stringify(user), data:user});
+    d.run(() => {
+        userDAO.updateUser(
+            req.params.id,
+            {
+                username: req.body.username,
+                password: req.body.password
             },
-            error: function(err){
+            {
+                success(user) {
+                    res.status(200).send({
+                        msg: `User updated successfully: ${JSON.stringify(user)}`,
+                        data: user
+                    });
+                },
+                error(err) {
+                    res.status(500).send(err);
+                }
+            }
+        );
+    });
+});
+
+// DELETE User
+router.delete('/:id', (req, res) => {
+    const d = domain.create();
+
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
+    });
+
+    d.run(() => {
+        userDAO.deleteUser(req.params.id, {
+            success(u) {
+                res.status(200).send({
+                    msg: `User deleted successfully: ${req.params.id}`,
+                    data: u
+                });
+            },
+            error(err) {
                 res.status(500).send(err);
             }
         });
     });
 });
 
-//DELETE User
-router.delete('/:id', function (req, res){
-    var d = domain.create();
+// USER login
+// curl -H "Content-Type: application/json" -X POST -d '{"username":"han_solo","password":"chewbacca"}' http://localhost:8000/api/0.1/user/login
+router.post('/login', (req, res) => {
+    const d = domain.create();
 
-    d.on('error', function(error){
-        if(!isInTest) console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+    d.on('error', (error) => {
+        if (!isInTest) console.log(error.stacktrace);
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        userDAO.deleteUser(req.params.id ,{
-            success: function(u){
-                res.status(200).send({msg: 'User deleted succesfully: ' + req.params.id,
-            data: u});
+    d.run(() => {
+        userDAO.loginUser(
+            {
+                username: req.body.username,
+                password: req.body.password
             },
-            error: function(err){
-                res.status(500).send(err);
+            {
+                success(user) {
+                    res.status(200).send(user);
+                },
+                error(err) {
+                    res.status(403).send(err);
+                }
             }
-        });
-    });
-});
-
-//USER login
-//curl -H "Content-Type: application/json" -X POST -d '{"username":"han_solo","password":"chewbacca"}' http://localhost:8000/api/0.1/user/login
-router.post('/login', function (req, res){
-    var d = domain.create();
-
-    d.on('error', function(error){
-        if(!isInTest) console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
-    });
-
-    d.run(function(){
-        userDAO.loginUser({
-                username:      req.body.username,
-                password:   req.body.password
-            }, {
-            success: function(user){
-                res.status(200).send(user);
-            },
-            error: function(err){
-                res.status(403).send(err);
-            }
-        });
+        );
     });
 });
 

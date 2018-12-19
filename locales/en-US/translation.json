@@ -1,43 +1,43 @@
 {
-  "app": {
-    "name": "Drone Parts"
-  },
-  "creator": {
-    "firstname": "Robertas",
-    "lastname": "Visniakovas"
-  },
-  "layout":{
-    "navbar":{
-      "title": "Drone Parts",
-      "exit": "exit",
-      "add": "add fruit"
+    "app": {
+        "name": "Drone Parts"
     },
-    "footer":{
-      "about": "contact",
-      "text": "DroneWorks &copy; 2018"
+    "creator": {
+        "firstname": "Robertas",
+        "lastname": "Visniakovas"
+    },
+    "layout": {
+        "navbar": {
+            "title": "Drone Parts",
+            "exit": "exit",
+            "add": "add fruit"
+        },
+        "footer": {
+            "about": "contact",
+            "text": "DroneWorks &copy; 2018"
+        }
+    },
+    "index": {
+        "title": "Drone Parts",
+        "login": {
+            "title": "Hello!",
+            "username": "User",
+            "password": "Password",
+            "forget": "Forgot your password?",
+            "submit": "Send"
+        },
+        "card": {
+            "save": "save",
+            "delete": "delete",
+            "name": "Name",
+            "description": "Description",
+            "price": "Price ¢/kg"
+        },
+        "table": {
+            "name": "Name",
+            "description": "Description",
+            "price": "Price $/kg",
+            "date": "Date"
+        }
     }
-  },
-  "index":{
-    "title": "Drone Parts",
-    "login": {
-      "title": "Hello!",
-      "username": "User",
-      "password": "Password",
-      "forget": "Forgot your password?",
-      "submit": "Send"
-    },
-    "card":{
-        "save": "save",
-        "delete": "delete",
-        "name": "Name",
-        "description": "Description",
-        "price": "Price ¢/kg"
-    },
-    "table":{
-        "name": "Name",
-        "description": "Description",
-        "price": "Price $/kg",
-        "date":  "Date"
-    }
-  }
 }

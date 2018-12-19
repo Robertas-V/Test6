@@ -1,78 +1,72 @@
-var hippie = require('hippie');
-var expect = require('chai').expect;
-var userDAO = require('./../model/DAO/userDAO');
+const chai = require('chai');
+const supertest = require('supertest');
+const app = require('../app.js');
+const userDAO = require('./../model/DAO/userDAO');
 
-var app = require('../app.js');
-var request = require('supertest')(app);
+const { expect } = chai;
+const request = supertest(app);
 
-describe('UserService', function () {
-    var user1 = {
-        username:"test@test.com",
-        password:"pito"
+describe('UserService', () => {
+    const user1 = {
+        username: 'test@test.com',
+        password: 'pito'
     };
 
-    var user2 = {
+    const user2 = {
         username: 'test2@mail.com',
         password: 'pass2'
     };
 
-    before(function(done) {
-        this.timeout(10000);
+    before((done) => {
         userDAO.createUser(user2, {
-            success: function(u){
+            success(u) {
                 expect(u.username).to.eql('test2@mail.com');
                 expect(u.password).to.eql('pass2');
                 user2._id = u._id;
                 done();
             },
-            error: function(err){
+            error(err) {
                 done(err);
             }
         });
     });
 
-    after(function(done){
-        this.timeout(10000);
-        userDAO.deleteUser(user1._id ,{
-            success: function(){
+    after((done) => {
+        userDAO.deleteUser(user1._id, {
+            success() {
                 done();
             },
-            error: function(err){
-            }
+            error() {}
         });
     });
 
-    describe('POST /users/', function () {
-        it('creates a new user', function (done) {
-            this.timeout(10000);
-
+    describe('POST /users/', () => {
+        it('creates a new user', (done) => {
             request
-            .post('/api/0.1/user/')
-            .send(user1)
-            .expect(201)
-            .end(function(err, res){
-                if (err) throw err;
+                .post('/api/0.1/user/')
+                .send(user1)
+                .expect(201)
+                .end((err, res) => {
+                    if (err) throw err;
                     user1._id = res.body.data._id;
-                done();
-            });
-        });
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('POST /user/', function () {
-        it('tries to create a duplicated user', function (done) {
-            this.timeout(10000);
-
+    describe('POST /user/', () => {
+        it('tries to create a duplicated user', (done) => {
             request
-            .post('/api/0.1/user/')
-            .send(user1)
-            .expect(500)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .post('/api/0.1/user/')
+                .send(user1)
+                .expect(500)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
-/*
+    /*
     describe('POST /users/', function () {
         it('tries to create an invalid user', function (done) {
             this.timeout(10000);
@@ -88,138 +82,123 @@ describe('UserService', function () {
         });
     });
 */
-    describe('GET /user/', function () {
-        it('returns all users', function (done) {
-            this.timeout(10000);
-
+    describe('GET /user/', () => {
+        it('returns all users', (done) => {
             request
-            .get('/api/0.1/user/')
-            .expect(200)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .get('/api/0.1/user/')
+                .expect(200)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('GET /user/:id', function () {
-        it('returns a user based on the id', function (done) {
-            this.timeout(10000);
-
+    describe('GET /user/:id', () => {
+        it('returns a user based on the id', (done) => {
             request
-            .get('/api/0.1/user/'+user1._id)
-            .expect(200)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .get(`/api/0.1/user/${user1._id}`)
+                .expect(200)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('GET /users/:id', function () {
-        it('tries to read user with non-existing id', function (done) {
-            this.timeout(10000);
-
+    describe('GET /users/:id', () => {
+        it('tries to read user with non-existing id', (done) => {
             request
-            .get('/api/0.1/user/nonvalidid')
-            .expect(404)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .get('/api/0.1/user/nonvalidid')
+                .expect(404)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('UPDATE /users/:id', function () {
-        it('updates user', function (done) {
-            this.timeout(10000);
+    describe('UPDATE /users/:id', () => {
+        it('updates user', (done) => {
             user2.username = 'foo';
 
             request
-            .put('/api/0.1/user/'+user2._id)
-            .send(user2)
-            .expect(200)
-            .end(function(err, res){
-                if (err) throw err;
-                expect(res.body.data.username).to.eql('foo');
-                done();
-            });
-        });
+                .put(`/api/0.1/user/${user2._id}`)
+                .send(user2)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) throw err;
+                    expect(res.body.data.username).to.eql('foo');
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('UPDATE /users/:id', function () {
-        it('updates user with invalid username', function (done) {
-            this.timeout(10000);
+    describe('UPDATE /users/:id', () => {
+        it('updates user with invalid username', (done) => {
             user2.username = undefined;
 
             request
-            .put('/api/0.1/user/'+user2._id)
-            .send(user2)
-            .expect(500)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .put(`/api/0.1/user/${user2._id}`)
+                .send(user2)
+                .expect(500)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('UPDATE /users/:id', function () {
-        it('updates non-existing user', function (done) {
-            this.timeout(10000);
+    describe('UPDATE /users/:id', () => {
+        it('updates non-existing user', (done) => {
             user2.username = 'foo';
 
             request
-            .put('/api/0.1/user/nonvalidid')
-            .send(user2)
-            .expect(500)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .put('/api/0.1/user/nonvalidid')
+                .send(user2)
+                .expect(500)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('POST /users/login', function () {
-        it('tries to login a user', function (done) {
-            this.timeout(10000);
-
+    describe('POST /users/login', () => {
+        it('tries to login a user', (done) => {
             request
-            .post('/api/0.1/user/login')
-            .send(user1)
-            .expect(200)
-            .end(function(err, res){
-                console.log(res.body.data);
-                if (err) throw err;
-                done();
-            });
-        });
+                .post('/api/0.1/user/login')
+                .send(user1)
+                .expect(200)
+                .end((err, res) => {
+                    console.log(res.body.data);
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('DELETE /users/:id', function () {
-        it('deletes user', function (done) {
-            this.timeout(10000);
-
+    describe('DELETE /users/:id', () => {
+        it('deletes user', (done) => {
             request
-            .del('/api/0.1/user/'+user2._id)
-            .expect(200)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .del(`/api/0.1/user/${user2._id}`)
+                .expect(200)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 
-    describe('DELETE /users/:id', function () {
-        it('deletes non-existing user', function (done) {
-            this.timeout(10000);
-
+    describe('DELETE /users/:id', () => {
+        it('deletes non-existing user', (done) => {
             request
-            .del('/api/0.1/user/nonvalidid')
-            .expect(500)
-            .end(function(err, res){
-                if (err) throw err;
-                done();
-            });
-        });
+                .del('/api/0.1/user/nonvalidid')
+                .expect(500)
+                .end((err) => {
+                    if (err) throw err;
+                    done();
+                });
+        }).timeout(10000);
     });
 });

@@ -1,43 +1,43 @@
 {
-  "app": {
-    "name": "Drone Parts"
-  },
-  "creator": {
-    "firstname": "Robertas",
-    "lastname": "Visniakovas"
-  },
-  "layout":{
-    "navbar":{
-      "title": "mis frutas",
-      "exit": "salir",
-      "add": "añadir fruta"
+    "app": {
+        "name": "Drone Parts"
     },
-    "footer":{
-      "about": "contacto",
-      "text": "DroneWorks &copy; 2018"
+    "creator": {
+        "firstname": "Robertas",
+        "lastname": "Visniakovas"
+    },
+    "layout": {
+        "navbar": {
+            "title": "mis frutas",
+            "exit": "salir",
+            "add": "añadir fruta"
+        },
+        "footer": {
+            "about": "contacto",
+            "text": "DroneWorks &copy; 2018"
+        }
+    },
+    "index": {
+        "title": "mis frutas",
+        "login": {
+            "title": "Hola!",
+            "username": "Usuario",
+            "password": "Contraseña",
+            "forget": "¿Olvidaste tu contraseña?",
+            "submit": "Entrar"
+        },
+        "card": {
+            "save": "guardar",
+            "delete": "eliminar",
+            "name": "Nombre",
+            "description": "Descripción",
+            "price": "Precio cent/kg"
+        },
+        "table": {
+            "name": "Nombre",
+            "description": "Descripción",
+            "price": "Precio €/kg",
+            "date": "Fecha"
+        }
     }
-  },
-  "index":{
-    "title": "mis frutas",
-    "login": {
-      "title": "Hola!",
-      "username": "Usuario",
-      "password": "Contraseña",
-      "forget": "¿Olvidaste tu contraseña?",
-      "submit": "Entrar"
-    },
-    "card":{
-      "save": "guardar",
-      "delete": "eliminar",
-      "name": "Nombre",
-      "description": "Descripción",
-      "price": "Precio cent/kg"
-    },
-    "table":{
-      "name": "Nombre",
-      "description": "Descripción",
-      "price": "Precio €/kg",
-      "date":  "Fecha"
-    }
-  }
 }

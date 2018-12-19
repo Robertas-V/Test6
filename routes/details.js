@@ -1,31 +1,31 @@
-var express = require('express'),
-    router = express.Router(),
-    domain = require('domain');
+const express = require('express');
 
-router.get('/', function(req, res, next) {
-    var d = domain.create();
+const router = express.Router();
+const domain = require('domain');
 
-    d.on('error', function(error){
+router.get('/', (req, res) => {
+    const d = domain.create();
+
+    d.on('error', (error) => {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        res.render('newPart', { detailsType: 'New', title: 'Details'});
+    d.run(() => {
+        res.render('newPart', { detailsType: 'New', title: 'Details' });
     });
 });
 
+router.get('/:id', (req, res) => {
+    const d = domain.create();
 
-router.get('/:id', function(req, res, next) {
-    var d = domain.create();
-
-    d.on('error', function(error){
+    d.on('error', (error) => {
         console.log(error.stacktrace);
-        res.status(500).send({'error': error.message});
+        res.status(500).send({ error: error.message });
     });
 
-    d.run(function(){
-        res.render('details', { id: req.params['id'], title: 'Details'});
+    d.run(() => {
+        res.render('details', { id: req.params.id, title: 'Details' });
     });
 });
 
